@@ -3,10 +3,12 @@ package com.daiqu.cm.daiqu;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -72,9 +74,11 @@ public class MainActivity extends Activity{
         @Override
         public void onClick(View view) {
             FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
+            enlarge_selected(view.getId());
             switch (view.getId()){
                 case R.id.bottom_bar_my:
                     setBottomTextColor(bottom_bar_my_text);
+
                     if(mMyFragment == null) {
                         mMyFragment = MyFragment.newInstance(getString(R.string.my));
                     }
@@ -83,6 +87,7 @@ public class MainActivity extends Activity{
                     break;
                 case R.id.bottom_bar_home:
                     setBottomTextColor(bottom_bar_home_text);
+
                     if(mHomeFragment == null) {
                         mHomeFragment = HomeFragment.newInstance(getString(R.string.home));
                     }
@@ -101,6 +106,46 @@ public class MainActivity extends Activity{
             beginTransaction.commit();
         }
     };
+
+    /**
+     * 放大选中的view
+     * 选中择将margin变为0,达到放大的视觉效果
+     * 方法略低效，待优化
+     * @param id
+     */
+    private void enlarge_selected(int id){
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                40,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1.0f);
+        lp.setMargins(2, 2, 2, 2);
+        bottom_bar_home.setLayoutParams(lp);
+        bottom_bar_faxian.setLayoutParams(lp);
+        bottom_bar_my.setLayoutParams(lp);
+        //设置放大的params
+        LinearLayout.LayoutParams lpBig = new LinearLayout.LayoutParams(
+                40,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1.0f);
+        lpBig.setMargins(0, 0, 0, 0);
+        switch (id) {
+            case R.id.bottom_bar_my:
+                bottom_bar_my.setLayoutParams(lpBig);
+                break;
+            case R.id.bottom_bar_home:
+                bottom_bar_home.setLayoutParams(lpBig);
+                break;
+            case R.id.bottom_bar_faxian:
+                bottom_bar_faxian.setLayoutParams(lpBig);
+                break;
+        }
+    }
+
+    private int min(int a, int b, int c){
+        int m = a;
+        if (m > b) m = b;
+        if (m > c) m = c;
+        return m;
+    }
 
     /**
      * 设置textview字体颜色
