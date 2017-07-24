@@ -16,7 +16,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:text="体育场西侧" />
 
         <TextView
@@ -24,7 +24,7 @@
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:text="---" />
 
         <TextView
@@ -32,14 +32,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:text="长思公寓四号楼" />
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -47,7 +47,7 @@
         <ImageView
             android:id="@+id/money_logon"
             android:layout_width="30dp"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:src="@drawable/money_logo"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/money_num"
@@ -57,10 +57,10 @@
         <TextView
             android:id="@+id/money_num"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:gravity="end"
             android:text="3"
-            android:textSize="35sp"
+            android:textSize="40sp"
             android:textColor="@color/OrangeRed"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
@@ -79,7 +79,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:text="12:00"/>
 
         <TextView
@@ -92,7 +92,7 @@
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:text="14:00"/>
     </LinearLayout>
 
@@ -116,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginLeft="7dp"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:text="圆通快递"/>
     </LinearLayout>
 
@@ -147,8 +147,11 @@
         android:id="@+id/rob_button"
         android:background="@drawable/rob_button_bg"
         android:text="@string/rob"
-        android:layout_width="80dp"
-        android:layout_height="20dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textSize="18sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
