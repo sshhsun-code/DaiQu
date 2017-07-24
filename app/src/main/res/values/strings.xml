@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">DaiQu</string>
     <string name="rob">我要抢单</string>
+    <string name="my">我的</string>
+    <string name="faxian">发现</string>
+    <string name="home">主页</string>
     <string name="splash_title">3Q</string>
     <string name="splash_text">\©2017 3Q.com All Rights Reserved</string>
     <string name="sign_in">登陆</string>
