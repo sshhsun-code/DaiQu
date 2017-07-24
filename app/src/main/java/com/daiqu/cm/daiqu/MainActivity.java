@@ -68,19 +68,37 @@ public class MainActivity extends Activity{
     }
 
     private View.OnClickListener bottom_bar_clickListener = new View.OnClickListener() {
+
         @Override
         public void onClick(View view) {
+            FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
             switch (view.getId()){
                 case R.id.bottom_bar_my:
                     setBottomTextColor(bottom_bar_my_text);
+                    if(mMyFragment == null) {
+                        mMyFragment = MyFragment.newInstance(getString(R.string.my));
+                    }
+                    Log.d(TAG, "mMyFragment: " + mMyFragment);
+                    beginTransaction.replace(R.id.main_content, mMyFragment);
                     break;
                 case R.id.bottom_bar_home:
                     setBottomTextColor(bottom_bar_home_text);
+                    if(mHomeFragment == null) {
+                        mHomeFragment = HomeFragment.newInstance(getString(R.string.home));
+                    }
+                    Log.d(TAG, "mHomeFragment: " + mHomeFragment);
+                    beginTransaction.replace(R.id.main_content, mHomeFragment);
                     break;
                 case R.id.bottom_bar_faxian:
                     setBottomTextColor(bottom_bar_faxian_text);
+                    if(mFaxianFragment == null) {
+                        mFaxianFragment = FaxianFragment.newInstance(getString(R.string.faxian));
+                    }
+                    Log.d(TAG, "mFaxianFragment: " + mFaxianFragment);
+                    beginTransaction.replace(R.id.main_content, mFaxianFragment);
                     break;
             }
+            beginTransaction.commit();
         }
     };
 

@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.daiqu.cm.daiqu.R;
+import com.daiqu.cm.daiqu.global.Constast;
+
 /**
  * Created by CM on 2017/7/24.
  */
@@ -15,7 +18,7 @@ public class FaxianFragment extends Fragment {
     public static FaxianFragment newInstance(String s){
         FaxianFragment faxianFragment = new FaxianFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("",s);
+        bundle.putString(Constast.name,s);
         faxianFragment.setArguments(bundle);
         return faxianFragment;
     }
@@ -29,7 +32,7 @@ public class FaxianFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-
+        View v = inflater.inflate(R.layout.faxian_fragment,container,false);
+        return v;
     }
 }
