@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="15dp"
+    android:background="@drawable/order_info_bg"
+    android:layout_height="150dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/money_layout"
+        android:id="@+id/address_layout">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="体育场西侧" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="---" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="25sp"
+            android:text="长思公寓四号楼" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/money_layout">
+        <ImageView
+            android:id="@+id/money_logon"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:src="@drawable/money_logo"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/money_num"
+
+             />
+
+        <TextView
+            android:id="@+id/money_num"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="end"
+            android:text="3"
+            android:textSize="35sp"
+            android:textColor="@color/OrangeRed"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/time_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/address_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="13dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="12:00"/>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="---"/>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="14:00"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/company_layout"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/yuantong"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="7dp"
+            android:textSize="20sp"
+            android:text="圆通快递"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/jiedanzhe_layout"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_marginLeft="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="已接单"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/rob_button"
+        android:background="@drawable/rob_button_bg"
+        android:text="@string/rob"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>
