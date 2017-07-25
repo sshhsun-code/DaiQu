@@ -3,7 +3,7 @@
     <string name="rob">我要抢单</string>
     <string name="my">我的</string>
     <string name="faxian">发现</string>
-    <string name="home">主页</string>
+    <string name="home">首页</string>
     <string name="splash_title">3Q</string>
     <string name="splash_text">\©2017 3Q.com All Rights Reserved</string>
     <string name="sign_in">登录</string>
@@ -12,4 +12,5 @@
     <string name="login_password_hint">数字加字母，8~16位</string>
     <string name="login_message_hint">短信验证码</string>
     <string name="to_main_page">进入首页</string>
+    <string name="package_info_title">填写订单信息</string>
 </resources>

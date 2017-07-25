@@ -2,7 +2,6 @@ package com.daiqu.cm.daiqu.fragment;
 
 import android.app.Fragment;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
@@ -23,7 +22,6 @@ import java.util.Random;
 
 import master.flame.danmaku.controller.DrawHandler;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
-import master.flame.danmaku.danmaku.model.Danmaku;
 import master.flame.danmaku.danmaku.model.DanmakuTimer;
 import master.flame.danmaku.danmaku.model.IDanmakus;
 import master.flame.danmaku.danmaku.model.android.DanmakuContext;
@@ -66,6 +64,7 @@ public class HomeFragment extends Fragment {
     private boolean isMeasured = false;
     private int height_RecArea = 300;
     private int with_RecArea = 300;
+    private int beginX, beginY;
 
     public static HomeFragment newInstance(String s){
         HomeFragment homeFragment = new HomeFragment();
@@ -86,7 +85,7 @@ public class HomeFragment extends Fragment {
         bottomImage = v.findViewById(R.id.bottom_iamge);
         tips = v.findViewById(R.id.tips);
 
-        danmakuView = (DanmakuView) v.findViewById(R.id.danmaku_view);
+        danmakuView = v.findViewById(R.id.danmaku_view);
         danmakuView.enableDanmakuDrawingCache(true);
         danmakuView.setCallback(new DrawHandler.Callback() {
             @Override
@@ -121,7 +120,8 @@ public class HomeFragment extends Fragment {
             screenHeight = dm.heightPixels;
             right_border = screenWidth - PADDING;
             bottom_border = screenHeight - PADDING - 310;
-
+            beginX = screenWidth / 2;
+            beginY = screenHeight / 2;
             ViewTreeObserver observer = topImage.getViewTreeObserver();
             observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 public boolean onPreDraw() {
@@ -150,6 +150,7 @@ public class HomeFragment extends Fragment {
                 right_border = screenWidth - PADDING;
                 bottom_border = screenHeight - PADDING - 180;
             }
+
 
             switch (ea) {
                 case MotionEvent.ACTION_DOWN: // 按下
@@ -204,6 +205,10 @@ public class HomeFragment extends Fragment {
                     }else if(lastX >= right_border - with_RecArea
                             && lastY >= bottom_border - height_RecArea) {
                         tips.setText("抢单------");
+                    }else {
+                        left = beginX-(v.getWidth()/2);
+
+                        setViewPosition(v,left, beginY - v.getHeight(),left+v.getWidth(),beginY);
                     }
 
 

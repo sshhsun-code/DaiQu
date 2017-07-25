@@ -8,4 +8,6 @@
     <color name="Lime">#00FF00</color>
     <color name="white">#FFFFFF</color>
     <color name="Black">#000000</color>
+    <color name="selectedRed">#F44336</color>
+    <color name="bottom_bar_white">#F2F2F2</color>
 </resources>
