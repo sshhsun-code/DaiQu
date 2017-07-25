@@ -165,71 +165,11 @@ public class MainActivity extends Activity{
         bottom_bar_faxian_text.setTextColor(this.getResources().getColor(R.color.Black));
     }
 
-    private View.OnTouchListener package_logo_TouchListener = new View.OnTouchListener() {
-        int lastX, lastY; // 记录移动的最后的位置
 
 
-        public boolean onTouch(View v, MotionEvent event) {
-            // 获取Action
-            int ea = event.getAction();
-            switch (ea) {
-                case MotionEvent.ACTION_DOWN: // 按下
-                    lastX = (int) event.getRawX();
-                    lastY = (int) event.getRawY();
-                    screenWidth = v.getWidth();
-                    screenHeight = v.getHeight();
-//                    Toast.makeText(MainActivity.this, "ACTION_DOWN：" + lastX
-//                            + "," + lastY, Toast.LENGTH_SHORT).show();
-                    break;
-
-                case MotionEvent.ACTION_MOVE: // 移动
-
-                    Log.d(TAG, "Move: " + event.getRawX() + ", " + event.getRawY());
-
-
-                    // 移动中动态设置位置
-                    int dy = (int) event.getRawY() - lastY;
-                    int left = v.getLeft();
-                    int top = v.getTop() + dy;
-                    int right = v.getRight();
-                    int bottom = v.getBottom() + dy;
-//                    if (top < 0) {
-//                        top = 0;
-//                        bottom = top + v.getHeight();
-//                    }
-//                    if (bottom > screenHeight) {
-//                        bottom = screenHeight;
-//                        top = bottom - v.getHeight();
-//                    }
-
-                    setViewPosition(v, left, top, right, bottom);
-
-
-                    // 将当前的位置再次设置
-                    lastY = (int) event.getRawY();
-                    break;
-
-                case MotionEvent.ACTION_UP: // 抬起
-                    break;
-            }
-            return false;
-        }
-    };
 
     /**
-     * 设置view的位置
-     * @param v
-     * @param left
-     * @param top
-     * @param right
-     * @param bottom
-     */
-    private void setViewPosition(View v, int left, int top, int right, int bottom){
-        v.layout(left,top,right,bottom);
-    }
-
-    /**
-     * set the default fagment
+     * set the default fragment
      * the content id should not be same with the parent content id
      */
     private void setDefaultFragment() {
