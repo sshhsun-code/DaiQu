@@ -6,36 +6,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.daiqu.cm.daiqu.DaiQuApplication;
 import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
 
 /**
  * Created by CM on 2017/7/24.
  *
- * 登录
+ * 注册成功界面
  */
 
-public class LoginActivity extends Activity{
+public class SignUpSuccessActivity extends Activity{
 
-    private Button sign_in;
-    private Button sign_up;
+    private Button sign_up_done;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        sign_in = (Button) findViewById(R.id.sign_in);
-        sign_in.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_sign_up_done);
+        sign_up_done = (Button) findViewById(R.id.sign_up_done);
+        sign_up_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            }
-        });
-        sign_up = (Button) findViewById(R.id.sign_up);
-        sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                startActivity(new Intent(DaiQuApplication.getInstance(), MainActivity.class));
             }
         });
     }

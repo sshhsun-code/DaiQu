@@ -20,6 +20,10 @@
         </activity>
         <activity android:name="com.daiqu.cm.daiqu.ui.LoginActivity">
         </activity>
+        <activity android:name="com.daiqu.cm.daiqu.ui.SignUpActivity">
+        </activity>
+        <activity android:name="com.daiqu.cm.daiqu.ui.SignUpSuccessActivity">
+        </activity>
     </application>
 
 </manifest>

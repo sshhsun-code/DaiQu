@@ -83,6 +83,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="3dp"
                 android:gravity="bottom"
+                android:hint="@string/login_password_hint"
                 android:textColorHint="#dbdbdb"
                 android:textSize="18dp"
                 android:layout_height="match_parent"/>
