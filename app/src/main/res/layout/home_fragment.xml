@@ -36,6 +36,8 @@
         android:text="TextView" />
 
     <master.flame.danmaku.ui.widget.DanmakuView
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
         android:id="@+id/danmaku_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

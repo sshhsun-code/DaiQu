@@ -235,7 +235,8 @@ public class HomeFragment extends Fragment {
     private void addDanmaku(String content, boolean withBorder) {
         BaseDanmaku danmaku = danmakuContext.mDanmakuFactory.createDanmaku(BaseDanmaku.TYPE_SCROLL_RL);
         danmaku.text = content;
-        danmaku.padding = 5;
+        int padding = new Random().nextInt(160);
+        danmaku.padding =  sp2px(padding);
         danmaku.textSize = sp2px(20);
         danmaku.textColor = Color.BLACK;
         danmaku.setTime(danmakuView.getCurrentTime());
@@ -257,7 +258,7 @@ public class HomeFragment extends Fragment {
                     String content = "" + time + time;
                     addDanmaku(content, false);
                     try {
-                        Thread.sleep(time);
+                        Thread.sleep(time * 10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
