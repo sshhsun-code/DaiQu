@@ -29,4 +29,5 @@ dependencies {
     compile 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.2.0'
 
+    compile files('src/main/lib/commons-io-1.4.jar')
 }

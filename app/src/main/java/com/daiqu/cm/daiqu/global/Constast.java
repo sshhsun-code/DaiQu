@@ -7,4 +7,7 @@ package com.daiqu.cm.daiqu.global;
 
 public class Constast {
     public static final String name = "fragment_name";
+
+    public static final int NET_SUCCESS = 0; //网络访问成功
+    public static final int NET_FAIL = 1; //网络访问失败
 }
