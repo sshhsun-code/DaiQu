@@ -1,6 +1,7 @@
 package com.daiqu.cm.daiqu.fragment;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,18 @@ import android.widget.TextView;
 import com.daiqu.cm.daiqu.R;
 import com.daiqu.cm.daiqu.global.Constast;
 
+import java.util.Random;
+
+import master.flame.danmaku.controller.DrawHandler;
+import master.flame.danmaku.danmaku.model.BaseDanmaku;
+import master.flame.danmaku.danmaku.model.Danmaku;
+import master.flame.danmaku.danmaku.model.DanmakuTimer;
+import master.flame.danmaku.danmaku.model.IDanmakus;
+import master.flame.danmaku.danmaku.model.android.DanmakuContext;
+import master.flame.danmaku.danmaku.model.android.Danmakus;
+import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
+import master.flame.danmaku.ui.widget.DanmakuView;
+
 /**
  * Created by CM on 2017/7/24.
  */
@@ -30,7 +43,19 @@ public class HomeFragment extends Fragment {
     private ImageView topImage;
     private ImageView bottomImage;
     private TextView tips;
+    private DanmakuView danmakuView;
 
+    //弹幕
+    private DanmakuContext danmakuContext;
+    private boolean showDanmaku;
+    private BaseDanmakuParser parser = new BaseDanmakuParser() {
+        @Override
+        protected IDanmakus parse() {
+            return new Danmakus();
+        }
+    };
+
+    //屏幕边界值
     private int screenWidth = 0;
     private int screenHeight = 0;
     private static final int PADDING = 50;
@@ -39,7 +64,6 @@ public class HomeFragment extends Fragment {
     private int right_border = PADDING;
     private int bottom_border = PADDING;
     private boolean isMeasured = false;
-
     private int height_RecArea = 300;
     private int with_RecArea = 300;
 
@@ -62,22 +86,52 @@ public class HomeFragment extends Fragment {
         bottomImage = v.findViewById(R.id.bottom_iamge);
         tips = v.findViewById(R.id.tips);
 
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        screenWidth = dm.widthPixels;
-        screenHeight = dm.heightPixels;
-        right_border = screenWidth - PADDING;
-        bottom_border = screenHeight - PADDING - 310;
-
-        ViewTreeObserver observer = topImage.getViewTreeObserver();
-        observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            public boolean onPreDraw() {
-                if (!isMeasured) {
-                    height_RecArea = topImage.getMeasuredHeight();
-                    with_RecArea = ((topImage.getMeasuredWidth() * 3))/2;
-                    isMeasured = true;
-                }
-                return true;
+        danmakuView = (DanmakuView) v.findViewById(R.id.danmaku_view);
+        danmakuView.enableDanmakuDrawingCache(true);
+        danmakuView.setCallback(new DrawHandler.Callback() {
+            @Override
+            public void prepared() {
+                showDanmaku = true;
+                danmakuView.start();
+                generateSomeDanmaku();
             }
+
+            @Override
+            public void updateTimer(DanmakuTimer timer) {
+
+            }
+
+            @Override
+            public void danmakuShown(BaseDanmaku danmaku) {
+
+            }
+
+            @Override
+            public void drawingFinished() {
+
+            }
+        });
+        danmakuContext = DanmakuContext.create();
+        danmakuView.prepare(parser, danmakuContext);
+
+
+        //屏幕尺寸测量，确定边界值、识别区域
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+            screenWidth = dm.widthPixels;
+            screenHeight = dm.heightPixels;
+            right_border = screenWidth - PADDING;
+            bottom_border = screenHeight - PADDING - 310;
+
+            ViewTreeObserver observer = topImage.getViewTreeObserver();
+            observer.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                public boolean onPreDraw() {
+                    if (!isMeasured) {
+                        height_RecArea = topImage.getMeasuredHeight();
+                        with_RecArea = ((topImage.getMeasuredWidth() * 3))/2;
+                        isMeasured = true;
+                    }
+                    return true;
+                }
         });
 
         return v;
@@ -85,7 +139,6 @@ public class HomeFragment extends Fragment {
 
     private View.OnTouchListener package_logo_TouchListener = new View.OnTouchListener() {
         int lastX, lastY; // 记录移动的最后的位置
-
 
         public boolean onTouch(View v, MotionEvent event) {
             // 获取Action
@@ -172,5 +225,79 @@ public class HomeFragment extends Fragment {
         v.layout(left,top,right,bottom);
     }
 
+    /**
+     * 向弹幕View中添加一条弹幕
+     * @param content
+     *          弹幕的具体内容
+     * @param  withBorder
+     *          弹幕是否有边框
+     */
+    private void addDanmaku(String content, boolean withBorder) {
+        BaseDanmaku danmaku = danmakuContext.mDanmakuFactory.createDanmaku(BaseDanmaku.TYPE_SCROLL_RL);
+        danmaku.text = content;
+        danmaku.padding = 5;
+        danmaku.textSize = sp2px(20);
+        danmaku.textColor = Color.BLACK;
+        danmaku.setTime(danmakuView.getCurrentTime());
+        if (withBorder) {
+            danmaku.borderColor = Color.GREEN;
+        }
+        danmakuView.addDanmaku(danmaku);
+    }
+
+    /**
+     * 随机生成一些弹幕内容以供测试
+     */
+    private void generateSomeDanmaku() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(showDanmaku) {
+                    int time = new Random().nextInt(300);
+                    String content = "" + time + time;
+                    addDanmaku(content, false);
+                    try {
+                        Thread.sleep(time);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * sp转px的方法。
+     */
+    public int sp2px(float spValue) {
+        final float fontScale = getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (danmakuView != null && danmakuView.isPrepared()) {
+            danmakuView.pause();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (danmakuView != null && danmakuView.isPrepared() && danmakuView.isPaused()) {
+            danmakuView.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        showDanmaku = false;
+        if (danmakuView != null) {
+            danmakuView.release();
+            danmakuView = null;
+        }
+    }
 
 }
