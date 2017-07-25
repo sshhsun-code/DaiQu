@@ -8,5 +8,5 @@
     <string name="splash_text">\©2017 3Q.com All Rights Reserved</string>
     <string name="sign_in">登录</string>
     <string name="sign_up">注册</string>
-    <string name="login_name_hint">手机号或邮箱</string>
+    <string name="login_name_hint">手机号</string>
 </resources>

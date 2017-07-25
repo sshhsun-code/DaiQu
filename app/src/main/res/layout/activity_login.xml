@@ -23,57 +23,74 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_below="@+id/login_logo"
         android:id="@+id/linearLayout">
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/phone"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
                 android:textColor="#2c2c2c"
                 android:textSize="18dp"
-                android:text="账号："/>
+                android:gravity="bottom"
+                android:text="："/>
             <EditText
                 android:id="@+id/login_name"
                 android:layout_width="0dp"
                 android:background="@null"
                 android:layout_weight="1"
+                android:layout_marginLeft="3dp"
+                android:gravity="bottom"
                 android:textColorHint="#dbdbdb"
                 android:textSize="18dp"
                 android:hint="@string/login_name_hint"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
         </LinearLayout>
         <View
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_height="2dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginBottom="10dp"
             android:background="#dbdbdb"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/password"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
                 android:textColor="#2c2c2c"
                 android:textSize="18dp"
-                android:text="密码："/>
+                android:gravity="bottom"
+                android:text="："/>
             <EditText
                 android:id="@+id/login_password"
                 android:layout_width="0dp"
                 android:background="@null"
                 android:layout_weight="1"
-                android:inputType="textPassword"
+                android:layout_marginLeft="3dp"
+                android:gravity="bottom"
                 android:textColorHint="#dbdbdb"
                 android:textSize="18dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="10dp"
             android:background="#dbdbdb"/>
@@ -102,6 +119,8 @@
     <RelativeLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_below="@id/linearLayout"
         android:layout_height="35dp">
         <Button
@@ -152,8 +171,8 @@
                 <ImageView
                     android:id="@+id/qq"
                     android:layout_width="40dp"
-                    android:src="@drawable/qq1"
-                    android:padding="2dp"
+                    android:src="@drawable/qq3"
+                    android:padding="1dp"
                     android:layout_height="40dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginBottom="5dp"
@@ -189,14 +208,16 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="40dp"
+                android:layout_width="45dp"
+                android:gravity="center_horizontal"
                 android:layout_alignParentRight="true"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/weibo"
-                    android:layout_width="40dp"
-                    android:src="@drawable/weibo1"
-                    android:layout_marginBottom="5dp"
+                    android:layout_width="45dp"
+                    android:src="@drawable/alipay"
+                    android:layout_marginBottom="6dp"
+                    android:padding="4dp"
                     android:layout_height="40dp"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -205,7 +226,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#515151"
                     android:textSize="14dp"
-                    android:text="微博"/>
+                    android:text="支付宝"/>
             </RelativeLayout>
 
         </RelativeLayout>
