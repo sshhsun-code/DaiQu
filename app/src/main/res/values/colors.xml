@@ -10,4 +10,5 @@
     <color name="Black">#000000</color>
     <color name="selectedRed">#F44336</color>
     <color name="bottom_bar_white">#F2F2F2</color>
+    <color name="line_background">#F2F2F2</color>
 </resources>

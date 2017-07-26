@@ -1,6 +1,7 @@
 package com.daiqu.cm.daiqu.fragment;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -65,6 +66,8 @@ public class HomeFragment extends Fragment {
     private int height_RecArea = 300;
     private int with_RecArea = 300;
     private int beginX, beginY;
+
+    private SendFragment mSendFragment;
 
     public static HomeFragment newInstance(String s){
         HomeFragment homeFragment = new HomeFragment();
@@ -199,12 +202,20 @@ public class HomeFragment extends Fragment {
                     break;
 
                 case MotionEvent.ACTION_UP: // 抬起
-
                     if (lastX <= with_RecArea && lastY <= height_RecArea) {
+                        FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
                         tips.setText("松手即发单");
+                        if(mSendFragment == null) {
+                            mSendFragment = SendFragment.newInstance();
+                        }
+                        Log.d(TAG, "mMyFragment: " + mSendFragment);
+                        beginTransaction.replace(R.id.main_content, mSendFragment);
+                        beginTransaction.commit();
+                        break;
                     }else if(lastX >= right_border - with_RecArea
                             && lastY >= bottom_border - height_RecArea) {
                         tips.setText("抢单------");
+
                     }else {
                         left = beginX-(v.getWidth()/2);
 

@@ -13,4 +13,12 @@
     <string name="login_message_hint">短信验证码</string>
     <string name="to_main_page">进入首页</string>
     <string name="package_info_title">填写订单信息</string>
+    <string name="phone">电话：</string>
+    <string name="company">物流公司：</string>
+    <string name="pickUp_address">取货地址：</string>
+    <string name="arrive_address">送达地址：</string>
+    <string name="name">姓名：</string>
+    <string name="arrive_time">送达时间：</string>
+    <string name="pickUp_code">取货码：</string>
+    <string name="confirm">确认</string>
 </resources>

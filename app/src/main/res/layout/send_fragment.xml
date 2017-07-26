@@ -1,37 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:background="@color/Black"
         android:layout_height="38dp"
         android:orientation="horizontal">
-
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <Button
-                android:id="@+id/button"
-                android:background="@drawable/back"
-                android:layout_width="43dp"
-                android:layout_height="wrap_content" />
+                android:id="@+id/send_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/back" />
+
             <TextView
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"
                 android:id="@+id/send_title_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/package_info_title" />
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/package_info_title"
+                android:textColor="@color/white" />
 
         </FrameLayout>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
+        <TextView
+            android:id="@+id/send_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textSize="19sp" />
 
-
+        <EditText
+            android:id="@+id/send_name_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="张三"
+            android:textSize="19sp" />
 
     </LinearLayout>
+
+    <View
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_background"/>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="19sp"
+            android:id="@+id/send_phone_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone" />
+
+        <EditText
+            android:layout_marginLeft="10dp"
+            android:text="18866669999"
+            android:gravity="center"
+            android:background="@null"
+            android:textSize="19sp"
+            android:layout_weight="1"
+            android:id="@+id/send_phone_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_background"/>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:textSize="19sp"
+            android:id="@+id/send_company_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/company" />
+
+        <Spinner
+            android:id="@+id/send_company_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_background"/>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:textSize="19sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pickUp_address" />
+
+        <EditText
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@null"
+            android:id="@+id/send_pick_up_address_edit"
+            android:textSize="19sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxxxxx东门" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/go"
+            android:layout_gravity="right"
+            android:layout_width="15dp"
+            android:layout_height="15dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_background"/>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="19sp"
+            android:id="@+id/send_code_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pickUp_code" />
+
+        <EditText
+            android:id="@+id/send_code_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="phone"
+            android:textSize="19sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_background"/>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="19sp"
+            android:id="@+id/send_arrive_address_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/arrive_address" />
+
+        <EditText
+            android:textSize="19sp"
+            android:background="@null"
+            android:gravity="center_horizontal"
+            android:id="@+id/send_arrive_address_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="xxxxxx5号楼" />
+
+        <Button
+            android:layout_marginRight="10dp"
+            android:id="@+id/send_arrive_address_btn"
+            android:background="@drawable/go"
+            android:layout_width="15dp"
+            android:layout_height="15dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_background"/>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="19sp"
+            android:id="@+id/send_arrive_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/arrive_time" />
+        <EditText
+            android:textSize="19sp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:id="@+id/send_arrive_time_edit_begin"
+            android:text="xx:xx"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="至"
+            android:textSize="19sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textSize="19sp"
+            android:text="xx:xx"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@null"
+            android:id="@+id/send_arrive_time_edit_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TimePicker
+        android:visibility="gone"
+        android:id="@+id/timePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/send_confirm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/send_confirm_btn_bg"
+        android:text="@string/confirm"
+        android:textColor="@color/white" />
+
 
 </LinearLayout>
