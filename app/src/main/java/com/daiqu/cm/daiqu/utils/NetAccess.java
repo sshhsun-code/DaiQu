@@ -1,7 +1,6 @@
 package com.daiqu.cm.daiqu.utils;
 
 import android.os.Handler;
-import android.os.Message;
 
 import com.daiqu.cm.daiqu.global.Constast;
 
@@ -12,8 +11,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static android.R.attr.path;
-
 /**
  * Created by CM on 2017/7/25.
  * 网络访问操作
@@ -23,6 +20,12 @@ public class NetAccess {
 
     private static final String BASEURL = "http://192.168.43.90:8080/DaiquServer/";
 
+    /**
+     * 进行登录操作
+     * @param name
+     * @param password
+     * @param handler
+     */
     public static void AccessLogin(String name, String password, final Handler handler) {
         final String accessUrl = BASEURL + "login.do?username="+name+"&password="+password;
 
@@ -34,6 +37,28 @@ public class NetAccess {
         }).start();
     }
 
+    /**
+     * 进行注册操作
+     * @param name
+     * @param password
+     * @param handler
+     */
+    public static void AccessSignUp(String name, String password, final Handler handler) {
+        final String accessUrl = BASEURL + "signup.do?username="+name+"&password="+password;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                doGet(accessUrl,handler);
+            }
+        }).start();
+    }
+
+    /**
+     * get请求访问
+     * @param path
+     * @param handler
+     */
     private static void doGet(String path,Handler handler) {
 
         try {
@@ -46,14 +71,18 @@ public class NetAccess {
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
                 InputStream is = connection.getInputStream();
-                IOUtils.toString(is);
-                handler.sendEmptyMessage(Constast.NET_SUCCESS);
+                String res = IOUtils.toString(is);
+                if ("6".equals(res)) {
+                    handler.sendEmptyMessage(Constast.NET_SIGNUP_SUCCESS);
+                } else if ("0".equals(res)){
+                    handler.sendEmptyMessage(Constast.NET_LOGIN_SUCCESS);
+                }
             } else {
-                handler.sendEmptyMessage(Constast.NET_FAIL);
+                handler.sendEmptyMessage(Constast.NET_LOGIN_FAIL);
             }
         } catch (IOException e) {
-            handler.sendEmptyMessage(Constast.NET_FAIL);
-//            e.printStackTrace();
+            handler.sendEmptyMessage(Constast.NET_LOGIN_FAIL);
+            e.printStackTrace();
         }
 
     }

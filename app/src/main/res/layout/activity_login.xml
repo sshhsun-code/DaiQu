@@ -50,6 +50,7 @@
                 android:layout_marginLeft="3dp"
                 android:gravity="bottom"
                 android:textColorHint="#dbdbdb"
+                android:maxLength="11"
                 android:textSize="18dp"
                 android:hint="@string/login_name_hint"
                 android:layout_height="match_parent"/>
@@ -84,6 +85,7 @@
                 android:layout_marginLeft="3dp"
                 android:gravity="bottom"
                 android:hint="@string/login_password_hint"
+                android:maxLength="16"
                 android:textColorHint="#dbdbdb"
                 android:textSize="18dp"
                 android:layout_height="match_parent"/>
