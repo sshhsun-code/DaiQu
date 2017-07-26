@@ -1,5 +1,14 @@
 package com.daiqu.cm.daiqu.utils;
 
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+
+import com.daiqu.cm.daiqu.bean.VerificationBean;
+import com.daiqu.cm.daiqu.global.Constast;
+import com.daiqu.cm.daiqu.global.GlobalPref;
+import com.google.gson.Gson;
+
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -33,7 +42,7 @@ public class MessageVerification {
     private static final String MOBILE="18829085916";
     //验证码长度，范围4～10，默认为4
     private static final String CODELEN="4";
-    public static void doPost() {
+    public static void doPost(String phonenum, Handler handler) {
         try {
             URL url = new URL(SERVER_URL);
             HttpURLConnection connection = null;
@@ -53,7 +62,7 @@ public class MessageVerification {
             connection.addRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
             String templateid = TEMPLATEID;
-            String mobile = MOBILE;
+            String mobile = TextUtils.isEmpty(phonenum) ? MOBILE :phonenum;
             String codeLen = CODELEN;
 
             connection.connect();
@@ -69,11 +78,18 @@ public class MessageVerification {
 
             //获得结果码
             int responseCode = connection.getResponseCode();
+            Message message = handler.obtainMessage(Constast.GET_VERIFICVATION_NUM);
+            message.arg1 = responseCode;
             if (responseCode == 200) {
                 InputStream is = connection.getInputStream();
                 String res = IOUtils.toString(is);
                 System.out.println("duanxin res:"+res);
+                Gson gson = new Gson();
+                VerificationBean bean = gson.fromJson(res, VerificationBean.class);
+                String num = bean.getObj();
+                GlobalPref.getInstance().setVerificationNum(num);
             }
+            handler.sendMessage(message);
         } catch (IOException e) {
 
             e.printStackTrace();

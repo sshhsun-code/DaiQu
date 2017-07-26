@@ -23,32 +23,33 @@ public class SplashActivity extends Activity{
         setContentView(R.layout.activity_splash);
 
         //测试按钮，方便界面跳转
-        findViewById(R.id.sign_in_login).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-            }
-        });
-
-        findViewById(R.id.sign_in_main).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-            }
-        });
+//        findViewById(R.id.sign_in_login).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+//            }
+//        });
+//
+//        findViewById(R.id.sign_in_main).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//            }
+//        });
         handler = new Handler(this.getMainLooper());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        //测试时由按钮控制跳转，开发完成后删除按钮代码，由此段代码控制跳转。
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-//            }
-//        },3000);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+
+            }
+        },3000);
     }
 
     @Override

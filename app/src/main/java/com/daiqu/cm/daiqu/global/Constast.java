@@ -13,4 +13,6 @@ public class Constast {
 
     public static final int NET_SIGNUP_SUCCESS = 2; //网络注册成功
     public static final int NET_SIGNUP_FAIL = 3; //网络注册失败
+
+    public static final int GET_VERIFICVATION_NUM = 4; //得到验证码
 }

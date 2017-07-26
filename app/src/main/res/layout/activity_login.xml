@@ -87,6 +87,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="3dp"
                 android:gravity="bottom"
+                android:inputType="textPassword"
                 android:hint="@string/login_password_hint"
                 android:maxLength="16"
                 android:textColorHint="#dbdbdb"

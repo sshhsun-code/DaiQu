@@ -89,6 +89,7 @@
                 android:hint="@string/login_message_hint"
                 android:maxLength="4"
                 android:gravity="bottom"
+                android:inputType="number"
                 android:textColorHint="#dbdbdb"
                 android:textSize="18dp"
                 android:layout_height="match_parent"/>

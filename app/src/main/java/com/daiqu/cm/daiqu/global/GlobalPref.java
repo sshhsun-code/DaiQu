@@ -20,6 +20,7 @@ public class GlobalPref {
 
     public static final String USER_NAME = "user_name";
     public static final String USER_PASSWORD = "user_pass_word";
+    public static final String VERIFICATION_NUM = "verification_num"; //验证码
 
 
 
@@ -105,5 +106,13 @@ public class GlobalPref {
 
     public String getUserPassword() {
         return getString(USER_PASSWORD,"");
+    }
+
+    public String getVerificationNum() {
+        return getString(VERIFICATION_NUM,"");
+    }
+
+    public void setVerificationNum (String num) {
+        putString(VERIFICATION_NUM,num);
     }
 }
