@@ -50,6 +50,8 @@
                 android:layout_marginLeft="3dp"
                 android:gravity="bottom"
                 android:textColorHint="#dbdbdb"
+                android:maxLength="11"
+                android:inputType="number"
                 android:textSize="18dp"
                 android:hint="@string/login_name_hint"
                 android:layout_height="match_parent"/>
@@ -83,13 +85,14 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="3dp"
                 android:hint="@string/login_message_hint"
+                android:maxLength="4"
                 android:gravity="bottom"
                 android:textColorHint="#dbdbdb"
                 android:textSize="18dp"
                 android:layout_height="match_parent"/>
             <TextView
                 android:id="@+id/txt_get_message"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="match_parent"
                 android:textColor="#fff"
                 android:textSize="10dp"
@@ -130,7 +133,9 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="3dp"
                 android:gravity="bottom"
+                android:inputType="textPassword"
                 android:textColorHint="#dbdbdb"
+                android:maxLength="16"
                 android:textSize="18dp"
                 android:hint="@string/login_password_hint"
                 android:layout_height="match_parent"/>

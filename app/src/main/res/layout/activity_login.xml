@@ -47,6 +47,7 @@
                 android:layout_width="0dp"
                 android:background="@null"
                 android:layout_weight="1"
+                android:inputType="number"
                 android:layout_marginLeft="3dp"
                 android:gravity="bottom"
                 android:textColorHint="#dbdbdb"

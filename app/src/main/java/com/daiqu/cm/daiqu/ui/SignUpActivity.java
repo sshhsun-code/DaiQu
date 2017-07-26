@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
 import com.daiqu.cm.daiqu.global.Constast;
+import com.daiqu.cm.daiqu.utils.MessageVerification;
 import com.daiqu.cm.daiqu.utils.NetAccess;
 
 /**
@@ -40,6 +41,12 @@ public class SignUpActivity extends Activity{
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        MessageVerification.doPost();
+                    }
+                }).start();
                 String name = TextUtils.isEmpty(login_name.getText().toString()) ? "test" : login_name.getText().toString();
                 String password = TextUtils.isEmpty(login_password.getText().toString()) ? "123456" : login_password.getText().toString();
                 NetAccess.AccessSignUp(name,password,mhandler);
