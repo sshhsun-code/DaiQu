@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">DaiQu</string>
+    <string name="app_name_cn">喵趣</string>
     <string name="rob">我要抢单</string>
     <string name="my">我的</string>
     <string name="faxian">发现</string>

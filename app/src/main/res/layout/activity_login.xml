@@ -11,11 +11,13 @@
 
     <ImageView
         android:id="@+id/login_logo"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/logo"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:padding="5dp"
+        android:src="@drawable/logo_black"
+        android:background="@drawable/circle_bg"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"/>
 
     <LinearLayout
