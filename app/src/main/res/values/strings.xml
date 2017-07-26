@@ -20,5 +20,8 @@
     <string name="name">姓名：</string>
     <string name="arrive_time">送达时间：</string>
     <string name="pickUp_code">取货码：</string>
-    <string name="confirm">确认</string>
+    <string name="confirm">提交</string>
+    <string name="price">价格：</string>
+    <string name="price_small">3元（小包裹）</string>
+    <string name="price_big">5元(大包裹)</string>
 </resources>

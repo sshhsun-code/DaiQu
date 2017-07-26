@@ -108,6 +108,46 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/price"
+            android:textSize="19sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioGroup
+
+            android:id="@+id/send_price_radioGroup"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/send_price_radio_small"
+                android:text="@string/price_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/send_price_radio_big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price_big" />
+        </RadioGroup>
+
+    </LinearLayout>
+    <View
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_background"/>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="1">
@@ -120,7 +160,9 @@
             android:text="@string/company" />
 
         <Spinner
+            android:gravity="center_horizontal"
             android:id="@+id/send_company_spinner"
+            android:entries="@array/company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -158,7 +200,7 @@
             android:text="xxxxxxx东门" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/send_pick_up_btn"
             android:layout_marginRight="10dp"
             android:background="@drawable/go"
             android:layout_gravity="right"
