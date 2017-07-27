@@ -40,7 +40,6 @@ public class AddInfoActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.add_info_activity);
         Log.d(TAG, "onCreate: ");
         back = (Button) findViewById(R.id.add_back);

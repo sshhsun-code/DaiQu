@@ -1,15 +1,22 @@
 package com.daiqu.cm.daiqu.utils;
 
 import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 
+import com.daiqu.cm.daiqu.bean.VerificationBean;
 import com.daiqu.cm.daiqu.global.Constast;
+import com.daiqu.cm.daiqu.global.GlobalPref;
+import com.google.gson.Gson;
 
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
 /**
  * Created by CM on 2017/7/25.
@@ -59,13 +66,14 @@ public class NetAccess {
      * @param str
      * @param handler
      */
-    public static void upOrderInfo(String str, final Handler handler) {
+    public static void upOrderInfo(final String str, final Handler handler) {
         final String orderInfoUrl = BASEURL + "addexpressorder.do?params=" + str;
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                doGet(orderInfoUrl,handler);
+//                doGet(orderInfoUrl,handler);
+                doPost(str,handler);
             }
         }).start();
     }
@@ -105,6 +113,38 @@ public class NetAccess {
 
     private static void doPost() {
 
+    }
+
+
+    public static void doPost(final String params, Handler handler) {
+
+        try {
+            URL url = new URL(BASEURL + "addexpressorder.do");
+            HttpURLConnection connection = null;
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(1000);
+            connection.setRequestMethod("POST");
+            connection.connect();
+
+            //设置http访问参数
+            PrintWriter writer = new PrintWriter(connection.getOutputStream());
+            writer.write(params);
+            writer.flush();
+            writer.close();
+
+
+            //获得结果码
+            int responseCode = connection.getResponseCode();
+            Message message = handler.obtainMessage(Constast.GET_VERIFICVATION_NUM);
+            message.arg1 = responseCode;
+            if (responseCode == 200) {
+
+            }
+            handler.sendMessage(message);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
     }
 
 
