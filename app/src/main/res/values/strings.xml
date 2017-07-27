@@ -35,4 +35,16 @@
     <string name="buy_price">￥ 9.9</string>
     <string name="buy_num">970人已购</string>
     <string name="buy_name">AA同款小背心欧美风...</string>
+    <string name="my_name">懒喵喵</string>
+    <string name="my_phone">18876851234</string>
+    <string name="order">订单</string>
+    <string name="give_money">打赏</string>
+    <string name="shopping">购物</string>
+    <string name="setting">设置</string>
+    <string name="add_info">宝贝，请补全你的信息</string>
+    <string name="user_name">昵称：</string>
+    <string name="school">学校：</string>
+    <string name="common_address">常用收货地址：</string>
+    <string name="queren">确认</string>
+    <string name="sure_message">喵~，您的信息已经保存成功了，快去发单吧！</string>
 </resources>

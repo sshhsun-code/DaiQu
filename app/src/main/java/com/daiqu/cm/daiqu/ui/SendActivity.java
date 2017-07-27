@@ -16,6 +16,8 @@ import android.widget.TimePicker;
 
 import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
+import com.daiqu.cm.daiqu.global.Constast;
+import com.daiqu.cm.daiqu.global.GlobalPref;
 
 /**
  * Created by CM on 2017/7/27.
@@ -67,6 +69,22 @@ public class SendActivity extends Activity implements View.OnClickListener{
         arrive_time_begin.setOnClickListener(this);
         arrive_time_end.setOnClickListener(this);
         confirm_btn.setOnClickListener(this);
+
+        initData();
+    }
+
+    private void initData() {
+        GlobalPref global = GlobalPref.getInstance(this);
+        if (global.getBoolean(Constast.HAS_ADDED,false)){
+            name_edit.setText(global.getString(Constast.NAME,""));
+            phone_edit.setText(global.getString(Constast.PHONE,""));
+            arrive_address.setText(global.getString(Constast.COMMON_ADDRESS,""));
+        }else{
+            Intent intent = new Intent(SendActivity.this,AddInfoActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 
     @Override

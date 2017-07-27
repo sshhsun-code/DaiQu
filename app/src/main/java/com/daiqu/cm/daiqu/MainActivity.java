@@ -16,6 +16,8 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.daiqu.cm.daiqu.fragment.FaxianFragment;
 import com.daiqu.cm.daiqu.fragment.HomeFragment;
 import com.daiqu.cm.daiqu.fragment.MyFragment;
+import com.daiqu.cm.daiqu.global.Constast;
+import com.daiqu.cm.daiqu.global.GlobalPref;
 import com.daiqu.cm.daiqu.inter.GoOtherActivity;
 
 

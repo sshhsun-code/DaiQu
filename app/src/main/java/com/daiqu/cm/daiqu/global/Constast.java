@@ -6,8 +6,9 @@ package com.daiqu.cm.daiqu.global;
  */
 
 public class Constast {
-    public static final String name = "fragment_name";
+    public static final String FRAGMENT_NAME = "fragment_name";
 
+    //网络
     public static final int NET_LOGIN_SUCCESS = 0; //网络登录成功
     public static final int NET_LOGIN_FAIL = 1; //网络登录失败
 
@@ -15,4 +16,14 @@ public class Constast {
     public static final int NET_SIGNUP_FAIL = 3; //网络注册失败
 
     public static final int GET_VERIFICVATION_NUM = 4; //得到验证码
+
+    //SP
+    public static final String NAME = "true_name";
+    public static final String USER_NAME = "user_name";
+    public static final String PHONE = "phone_number";
+    public static final String SCHOOL = "school_name";
+    public static final String COMMON_ADDRESS = "common_address";
+    public static final String HAS_ADDED = "has_added";
+    public static final String IS_FIRST = "is_first";
+
 }

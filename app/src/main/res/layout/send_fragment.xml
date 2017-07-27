@@ -200,6 +200,7 @@
             android:text="xxxxxxx东门" />
 
         <Button
+            android:visibility="gone"
             android:id="@+id/send_pick_up_btn"
             android:layout_marginRight="10dp"
             android:background="@drawable/go"
@@ -273,6 +274,7 @@
             android:text="xxxxxx5号楼" />
 
         <Button
+            android:visibility="gone"
             android:layout_marginRight="10dp"
             android:id="@+id/send_arrive_address_btn"
             android:background="@drawable/go"
