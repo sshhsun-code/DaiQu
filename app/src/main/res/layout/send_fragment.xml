@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/Black"
-        android:layout_height="38dp"
+        android:layout_height="45dp"
         android:orientation="horizontal">
 
         <FrameLayout
@@ -298,13 +298,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/arrive_time" />
-        <EditText
+        <TextView
             android:textSize="19sp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:id="@+id/send_arrive_time_edit_begin"
             android:text="xx:xx"
-            android:background="@null"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -312,22 +311,16 @@
             android:textSize="19sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <EditText
+        <TextView
             android:textSize="19sp"
             android:text="xx:xx"
             android:gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="@null"
             android:id="@+id/send_arrive_time_edit_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <TimePicker
-        android:visibility="gone"
-        android:id="@+id/timePicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/send_confirm_btn"

@@ -8,7 +8,12 @@
     <color name="Lime">#00FF00</color>
     <color name="white">#FFFFFF</color>
     <color name="Black">#000000</color>
+    <color name="confirm_btn">#333333</color>
+    <color name="text_gray">#333333</color>
+    <color name="text_wgray">#999999</color>
+    <color name="line">#dddddd</color>
     <color name="selectedRed">#F44336</color>
     <color name="bottom_bar_white">#F2F2F2</color>
     <color name="line_background">#F2F2F2</color>
+    <color name="transparent">#00000000</color>
 </resources>

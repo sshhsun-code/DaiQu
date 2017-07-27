@@ -1,5 +1,7 @@
 package com.daiqu.cm.daiqu.fragment;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
@@ -13,11 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
 import com.daiqu.cm.daiqu.global.Constast;
+import com.daiqu.cm.daiqu.inter.GoOtherActivity;
+import com.daiqu.cm.daiqu.ui.SendActivity;
 
 import java.util.Random;
 
@@ -68,6 +74,8 @@ public class HomeFragment extends Fragment {
     private int beginX, beginY;
 
     private SendFragment mSendFragment;
+
+    public GoOtherActivity goOtherActivity;
 
     public static HomeFragment newInstance(String s){
         HomeFragment homeFragment = new HomeFragment();
@@ -203,26 +211,24 @@ public class HomeFragment extends Fragment {
 
                 case MotionEvent.ACTION_UP: // 抬起
                     if (lastX <= with_RecArea && lastY <= height_RecArea) {
-                        FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
-                        tips.setText("松手即发单");
-                        if(mSendFragment == null) {
-                            mSendFragment = SendFragment.newInstance();
-                        }
-                        Log.d(TAG, "mMyFragment: " + mSendFragment);
-                        beginTransaction.replace(R.id.main_content, mSendFragment);
-                        beginTransaction.commit();
+                        goOtherActivity.goOhter(new SendActivity());
+//                        FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
+//                        tips.setText("松手即发单");
+//                        if(mSendFragment == null) {
+//                            mSendFragment = SendFragment.newInstance();
+//                        }
+//                        Log.d(TAG, "mMyFragment: " + mSendFragment);
+//                        beginTransaction.replace(R.id.main_content, mSendFragment);
+//                        beginTransaction.commit();
                         break;
                     }else if(lastX >= right_border - with_RecArea
                             && lastY >= bottom_border - height_RecArea) {
                         tips.setText("抢单------");
-
+                        showDialog();
                     }else {
                         left = beginX-(v.getWidth()/2);
-
                         setViewPosition(v,left, beginY - v.getHeight(),left+v.getWidth(),beginY);
                     }
-
-
                     break;
             }
             return false;
@@ -317,4 +323,34 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private void showDialog(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+        View view = View.inflate(getActivity(),R.layout.authentication_dialog,null);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+
+        view.findViewById(R.id.authentication_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        view.findViewById(R.id.authentication_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: authentication_btn");
+            }
+        });
+
+        dialog.show();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity != null){
+            goOtherActivity = (GoOtherActivity) activity;
+        }
+    }
 }

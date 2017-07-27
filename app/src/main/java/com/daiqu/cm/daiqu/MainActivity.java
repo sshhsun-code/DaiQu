@@ -2,6 +2,7 @@ package com.daiqu.cm.daiqu;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -15,9 +16,10 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.daiqu.cm.daiqu.fragment.FaxianFragment;
 import com.daiqu.cm.daiqu.fragment.HomeFragment;
 import com.daiqu.cm.daiqu.fragment.MyFragment;
+import com.daiqu.cm.daiqu.inter.GoOtherActivity;
 
 
-public class MainActivity extends Activity implements BottomNavigationBar.OnTabSelectedListener {
+public class MainActivity extends Activity implements BottomNavigationBar.OnTabSelectedListener,GoOtherActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -62,13 +64,18 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
                 .initialise();
         bottomNavigationBar.setTabSelectedListener(this);
 
-        setDefaultFragment();
+
 
 
 
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setDefaultFragment();
+    }
 
     /**
      * 设置textview字体颜色
@@ -138,6 +145,13 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
 
     @Override
     public void onTabReselected(int position) {
+
+    }
+
+    @Override
+    public void goOhter(Activity activity) {
+        Intent intent = new Intent(MainActivity.this,activity.getClass());
+        startActivity(intent);
 
     }
 }

@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleInstance">
         </activity>
         <activity android:name="com.daiqu.cm.daiqu.ui.LoginActivity">
         </activity>
@@ -26,6 +28,7 @@
         </activity>
         <activity android:name="com.daiqu.cm.daiqu.ui.SignUpSuccessActivity">
         </activity>
+        <activity android:name="com.daiqu.cm.daiqu.ui.SendActivity"/>
     </application>
 
 </manifest>
