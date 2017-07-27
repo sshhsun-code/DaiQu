@@ -23,4 +23,9 @@
         <item name="android:windowBackground">@color/android:transparent</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/confirm_btn</item>
+        <item name="colorControlActivated">@color/confirm_btn</item>
+    </style>
 </resources>

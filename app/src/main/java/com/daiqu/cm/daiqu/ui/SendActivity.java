@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,17 +16,29 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.daiqu.cm.daiqu.DaiQuApplication;
 import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
+import com.daiqu.cm.daiqu.bean.OrderInfo;
+import com.daiqu.cm.daiqu.fragment.SendFragment;
 import com.daiqu.cm.daiqu.global.Constast;
 import com.daiqu.cm.daiqu.global.GlobalPref;
+import com.daiqu.cm.daiqu.utils.NetAccess;
+import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by CM on 2017/7/27.
  */
 
 public class SendActivity extends Activity implements View.OnClickListener{
+
+    private static final String TAG = "SendActivity";
+
     private Button backButton;
     private EditText name_edit;
     private EditText phone_edit;
@@ -40,6 +55,9 @@ public class SendActivity extends Activity implements View.OnClickListener{
     private RadioButton price_small_rb;
     private RadioButton price_big_rb;
     private TimePicker timePicker;
+
+    private Handler mhandler;
+    private long millisTime;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,17 +92,29 @@ public class SendActivity extends Activity implements View.OnClickListener{
     }
 
     private void initData() {
+        Log.d(TAG, "initData: ");
+        
         GlobalPref global = GlobalPref.getInstance(this);
         if (global.getBoolean(Constast.HAS_ADDED,false)){
             name_edit.setText(global.getString(Constast.NAME,""));
             phone_edit.setText(global.getString(Constast.PHONE,""));
             arrive_address.setText(global.getString(Constast.COMMON_ADDRESS,""));
-        }else{
-            Intent intent = new Intent(SendActivity.this,AddInfoActivity.class);
+        }else {
+
+            Intent intent  = new Intent(SendActivity.this,AddInfoActivity.class);
             startActivity(intent);
+
         }
 
+        mhandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
 
+                }
+            }
+        };
+        
     }
 
     @Override
@@ -113,6 +143,23 @@ public class SendActivity extends Activity implements View.OnClickListener{
 //                beginTransaction.commit();
                 break;
             case R.id.send_confirm_btn:
+
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.setOrder_name(name_edit.getText().toString());
+                orderInfo.setOrder_phone(phone_edit.getText().toString());
+                orderInfo.setOrder_company_type(company_spinner.getSelectedItem().toString());
+                orderInfo.setOrder_home_address(arrive_address.getText().toString());
+                orderInfo.setOrder_pick_num(pick_up_code.getText().toString());
+                orderInfo.setOrder_serial_num(getMillisTime());
+                orderInfo.setOrder_date(getDate());
+                orderInfo.setOrder_price(getPrice());
+                orderInfo.setOrder_pick_time(getPickTime());
+                orderInfo.setOrder_pick_address(pick_up_address.getText().toString());
+                orderInfo.setUserphone(phone_edit.getText().toString());
+                Gson gson = new Gson();
+                String info = gson.toJson(orderInfo);
+                NetAccess.upOrderInfo(info,mhandler);
+
                 showDialog();
                 break;
             case R.id.send_arrive_time_edit_begin:
@@ -163,5 +210,27 @@ public class SendActivity extends Activity implements View.OnClickListener{
 
         //参数都设置完成了，创建并显示出来
         builder.create().show();
+    }
+
+    private Date getDate(){
+        Date curDate    = new Date(millisTime);//获取当前时间
+        return curDate;
+    }
+
+    private String getMillisTime(){
+        millisTime = System.currentTimeMillis();
+        return  millisTime + "";
+    }
+
+    private int getPrice(){
+        if(radioGroup.getCheckedRadioButtonId() == R.id.send_price_radio_small){
+            return 3;
+        }else {
+            return 5;
+        }
+    }
+
+    private String getPickTime(){
+        return arrive_time_begin.getText().toString() + "-" + arrive_time_end.getText().toString();
     }
 }

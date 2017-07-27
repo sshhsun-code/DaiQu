@@ -19,8 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:launchMode="singleInstance">
+            android:name=".MainActivity">
         </activity>
         <activity android:name="com.daiqu.cm.daiqu.ui.LoginActivity">
         </activity>
@@ -30,6 +29,8 @@
         </activity>
         <activity android:name="com.daiqu.cm.daiqu.ui.SendActivity"/>
         <activity android:name="com.daiqu.cm.daiqu.ui.SendResaultActivity"/>
+        <activity android:name="com.daiqu.cm.daiqu.ui.AddInfoActivity"/>
+        <activity android:name="com.daiqu.cm.daiqu.ui.OrderInfoActivity"/>
     </application>
 
 </manifest>

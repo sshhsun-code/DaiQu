@@ -18,7 +18,7 @@ public class FaxianFragment extends Fragment {
     public static FaxianFragment newInstance(String s){
         FaxianFragment faxianFragment = new FaxianFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(Constast.name,s);
+        bundle.putString(Constast.NAME,s);
         faxianFragment.setArguments(bundle);
         return faxianFragment;
     }

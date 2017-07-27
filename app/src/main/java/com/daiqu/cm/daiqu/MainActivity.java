@@ -19,6 +19,8 @@ import com.daiqu.cm.daiqu.fragment.MyFragment;
 import com.daiqu.cm.daiqu.global.Constast;
 import com.daiqu.cm.daiqu.global.GlobalPref;
 import com.daiqu.cm.daiqu.inter.GoOtherActivity;
+import com.daiqu.cm.daiqu.ui.AddInfoActivity;
+import com.daiqu.cm.daiqu.ui.SendActivity;
 
 
 public class MainActivity extends Activity implements BottomNavigationBar.OnTabSelectedListener,GoOtherActivity {
@@ -152,7 +154,10 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
 
     @Override
     public void goOhter(Activity activity) {
-        Intent intent = new Intent(MainActivity.this,activity.getClass());
+        Intent intent = new Intent();
+
+        intent.setClass(MainActivity.this,activity.getClass());
+
         startActivity(intent);
 
     }

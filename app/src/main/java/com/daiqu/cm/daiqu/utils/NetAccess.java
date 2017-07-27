@@ -55,6 +55,22 @@ public class NetAccess {
     }
 
     /**
+     * 提交订单信息操作
+     * @param str
+     * @param handler
+     */
+    public static void upOrderInfo(String str, final Handler handler) {
+        final String orderInfoUrl = BASEURL + "addexpressorder.do?params=" + str;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                doGet(orderInfoUrl,handler);
+            }
+        }).start();
+    }
+
+    /**
      * get请求访问
      * @param path
      * @param handler

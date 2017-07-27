@@ -42,6 +42,7 @@
         <EditText
             android:id="@+id/add_name"
             android:gravity="center"
+            style="@style/MyEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -62,6 +63,7 @@
         <EditText
             android:id="@+id/add_user_name"
             android:gravity="center"
+            style="@style/MyEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -82,6 +84,7 @@
         <EditText
             android:id="@+id/add_phone"
             android:gravity="center"
+            style="@style/MyEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -102,6 +105,7 @@
         <EditText
             android:id="@+id/add_school"
             android:gravity="center"
+            style="@style/MyEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -122,6 +126,7 @@
         <EditText
             android:id="@+id/common_address"
             android:gravity="center"
+            style="@style/MyEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

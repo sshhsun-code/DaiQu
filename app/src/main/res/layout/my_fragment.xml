@@ -61,6 +61,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/my_order"
         android:layout_marginTop="20dp"
         android:padding="10dp"
         android:background="@color/bottom_bar_white"

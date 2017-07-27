@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
     public static HomeFragment newInstance(String s){
         HomeFragment homeFragment = new HomeFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(Constast.name,s);
+        bundle.putString(Constast.NAME,s);
         homeFragment.setArguments(bundle);
         return homeFragment;
     }

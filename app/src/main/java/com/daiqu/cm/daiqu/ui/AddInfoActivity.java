@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,8 +24,10 @@ import com.daiqu.cm.daiqu.global.GlobalPref;
  * Created by CM on 2017/7/27.
  */
 
-public class AddInfoActivity extends Activity implements View.OnClickListener{
+public class AddInfoActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private static final String TAG = "AddInfoActivity";
+    
     private Button back;
     private EditText name;
     private EditText user_name;
@@ -33,19 +37,19 @@ public class AddInfoActivity extends Activity implements View.OnClickListener{
     private Button sure_btn;
 
 
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.add_info_activity);
-        back = findViewById(R.id.add_back);
-        name = findViewById(R.id.add_name);
-        user_name = findViewById(R.id.add_user_name);
-        phone = findViewById(R.id.add_phone);
-        school = findViewById(R.id.add_school);
-        common_address = findViewById(R.id.common_address);
-        sure_btn = findViewById(R.id.add_btn);
+        Log.d(TAG, "onCreate: ");
+        back = (Button) findViewById(R.id.add_back);
+        name = (EditText) findViewById(R.id.add_name);
+        user_name = (EditText) findViewById(R.id.add_user_name);
+        phone = (EditText) findViewById(R.id.add_phone);
+        school = (EditText) findViewById(R.id.add_school);
+        common_address = (EditText) findViewById(R.id.common_address);
+        sure_btn = (Button) findViewById(R.id.add_btn);
 
         back.setOnClickListener(this);
         sure_btn.setOnClickListener(this);
@@ -60,8 +64,9 @@ public class AddInfoActivity extends Activity implements View.OnClickListener{
             case R.id.add_btn:
                 if (save()){
                     showDialog();
+
                 }else {
-                    Toast.makeText(this,"喵~ 必须全部填写完整哦！",Toast.LENGTH_SHORT);
+                    Toast.makeText(this,"喵~ 必须全部填写完整哦！",Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -96,11 +101,12 @@ public class AddInfoActivity extends Activity implements View.OnClickListener{
         sp.putString(Constast.SCHOOL,school.getText().toString());
         if (isEmpty(common_address)) return false;
         sp.putString(Constast.COMMON_ADDRESS,common_address.getText().toString());
+        GlobalPref.getInstance().putBoolean(Constast.HAS_ADDED,true);
         return true;
     }
 
     private boolean isEmpty(EditText editText){
-        if (editText == null || editText.getText().equals("")){
+        if (editText == null || editText.getText().toString().equals("")){
             return true;
         }
         return false;
