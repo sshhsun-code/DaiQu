@@ -43,6 +43,9 @@ public class MessageVerification {
     //验证码长度，范围4～10，默认为4
     private static final String CODELEN="4";
     public static void doPost(String phonenum, Handler handler) {
+        if (TextUtils.isEmpty(phonenum) || handler == null) {
+            return;
+        }
         try {
             URL url = new URL(SERVER_URL);
             HttpURLConnection connection = null;
@@ -62,7 +65,7 @@ public class MessageVerification {
             connection.addRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
             String templateid = TEMPLATEID;
-            String mobile = TextUtils.isEmpty(phonenum) ? MOBILE :phonenum;
+            String mobile =  phonenum;
             String codeLen = CODELEN;
 
             connection.connect();
