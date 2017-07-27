@@ -132,6 +132,8 @@ public class SendActivity extends Activity implements View.OnClickListener{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss(); //关闭dialog
+                Intent intent = new Intent(SendActivity.this,SendResaultActivity.class);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() { //设置取消按钮

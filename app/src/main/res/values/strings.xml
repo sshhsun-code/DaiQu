@@ -29,4 +29,10 @@
     <string name="authentication_tips">接单需要进行身份验证，一分钟即可呦~</string>
     <string name="immediate_authen">立即认证</string>
     <string name="confirm_tips">请确认以上信息正确无误，发布成功后不可修改，点击确认立即发布。</string>
+    <string name="back_to_home">返回首页</string>
+    <string name="send_success">发送成功，请到“我的”查看进度。</string>
+    <string name="all_buy">大家都在买</string>
+    <string name="buy_price">￥ 9.9</string>
+    <string name="buy_num">970人已购</string>
+    <string name="buy_name">AA同款小背心欧美风...</string>
 </resources>

@@ -29,6 +29,7 @@
         <activity android:name="com.daiqu.cm.daiqu.ui.SignUpSuccessActivity">
         </activity>
         <activity android:name="com.daiqu.cm.daiqu.ui.SendActivity"/>
+        <activity android:name="com.daiqu.cm.daiqu.ui.SendResaultActivity"/>
     </application>
 
 </manifest>
