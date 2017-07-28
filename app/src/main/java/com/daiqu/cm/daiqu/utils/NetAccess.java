@@ -85,7 +85,7 @@ public class NetAccess {
      * @param handler
      */
     public static void getOrderStatus(String phone, String num, final Handler handler){
-        final String getStatusUrl = BASEURL + "getexpressorder.do?phone="+phone+"&order_serial_num="+num;
+        final String getStatusUrl = BASEURL + "getorder.do?phone="+phone+"&order_serial_num="+num;
         new Thread(new Runnable() {
             @Override
             public void run() {
