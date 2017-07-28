@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -43,6 +44,13 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
 
     private Handler mHandler;
 
+    private Handler mcheckHandler;
+
+    private HandlerThread checkThread;
+
+    private boolean checkDone = false;
+
+    private static int index = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,6 +97,8 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
             }
         });
 
+        initBackThread();
+
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -103,6 +113,7 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
                         break;
                     case Constast.DONE:
                         text1.setText("已完成");
+                        checkDone = true;
                         break;
                     case Constast.RECEIVING:
                         text1.setText(("请确收货"));
@@ -110,6 +121,25 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
                 }
             }
         };
+    }
+
+    private void initBackThread() {
+        checkThread = new HandlerThread("check-status");
+        checkThread.start();
+
+        mcheckHandler = new Handler(checkThread.getLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                checkStatus();
+                if (!checkDone) {
+                    mcheckHandler.sendEmptyMessageDelayed(0,3000);
+                }
+            }
+        };
+    }
+
+    private void checkStatus() {
+        getData();
     }
 
     @Override
@@ -120,15 +150,34 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mcheckHandler.sendEmptyMessage(0);
+    }
+
+    @Override
     public void onClick(View view) {
         this.finish();
     }
 
     private void getData(){
+        if (checkDone) {
+        return;
+        }
+        Log.e("OrderInfoActivity","第"+(index++)+"次请求数据。");
         String phone = GlobalPref.getInstance(OrderInfoActivity.this)
                 .getString(Constast.LOGIN_PHONE_NUMBER,"");
         String order_serial_num = GlobalPref.getInstance(OrderInfoActivity.this)
                 .getString(Constast.NEW_ORDER_NUMBER,"");
         NetAccess.getOrderStatus(phone,order_serial_num,mHandler);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("OrderInfoActivity","-----------------------");
+        checkThread.quit();
+        checkDone = true;
+        index = 1;
     }
 }
