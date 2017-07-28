@@ -79,6 +79,22 @@ public class NetAccess {
     }
 
     /**
+     * 查询订单信息
+     * @param phone
+     * @param num
+     * @param handler
+     */
+    public static void getOrderStatus(String phone, String num, final Handler handler){
+        final String getStatusUrl = BASEURL + "getexpressorder.do?phone="+phone+"&order_serial_num="+num;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                doGet(getStatusUrl,handler);
+            }
+        }).start();
+    }
+
+    /**
      * get请求访问
      * @param path
      * @param handler
@@ -110,6 +126,8 @@ public class NetAccess {
         }
 
     }
+
+
 
     private static void doPost() {
 
@@ -146,6 +164,8 @@ public class NetAccess {
             e.printStackTrace();
         }
     }
+
+
 
 
 }

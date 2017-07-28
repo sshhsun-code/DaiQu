@@ -143,23 +143,6 @@ public class SendActivity extends Activity implements View.OnClickListener{
 //                beginTransaction.commit();
                 break;
             case R.id.send_confirm_btn:
-
-                OrderInfo orderInfo = new OrderInfo();
-                orderInfo.setOrder_name(name_edit.getText().toString());
-                orderInfo.setOrder_phone(phone_edit.getText().toString());
-                orderInfo.setOrder_company_type(company_spinner.getSelectedItem().toString());
-                orderInfo.setOrder_home_address(arrive_address.getText().toString());
-                orderInfo.setOrder_pick_num(pick_up_code.getText().toString());
-                orderInfo.setOrder_serial_num(getMillisTime());
-                orderInfo.setOrder_date(getDate());
-                orderInfo.setOrder_price(getPrice());
-                orderInfo.setOrder_pick_time(getPickTime());
-                orderInfo.setOrder_pick_address(pick_up_address.getText().toString());
-                orderInfo.setUserphone(phone_edit.getText().toString());
-                Gson gson = new Gson();
-                String info = gson.toJson(orderInfo);
-                NetAccess.upOrderInfo(info,mhandler);
-
                 showDialog();
                 break;
             case R.id.send_arrive_time_edit_begin:
@@ -196,6 +179,7 @@ public class SendActivity extends Activity implements View.OnClickListener{
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() { //设置确定按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                postToServer();
                 dialog.dismiss(); //关闭dialog
                 Intent intent = new Intent(SendActivity.this,SendResaultActivity.class);
                 startActivity(intent);
@@ -219,6 +203,7 @@ public class SendActivity extends Activity implements View.OnClickListener{
 
     private String getMillisTime(){
         millisTime = System.currentTimeMillis();
+        GlobalPref.getInstance(SendActivity.this).putString(Constast.NEW_ORDER_NUMBER,millisTime+"");
         return  millisTime + "";
     }
 
@@ -232,5 +217,24 @@ public class SendActivity extends Activity implements View.OnClickListener{
 
     private String getPickTime(){
         return arrive_time_begin.getText().toString() + "-" + arrive_time_end.getText().toString();
+    }
+
+    private void postToServer(){
+        final OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setOrder_name(name_edit.getText().toString());
+        orderInfo.setOrder_phone(phone_edit.getText().toString());
+        orderInfo.setOrder_company_type(company_spinner.getSelectedItem().toString());
+        orderInfo.setOrder_home_address(arrive_address.getText().toString());
+        orderInfo.setOrder_pick_num(pick_up_code.getText().toString());
+        orderInfo.setOrder_serial_num(getMillisTime());
+        orderInfo.setOrder_date(getDate());
+        orderInfo.setOrder_price(getPrice());
+        orderInfo.setOrder_pick_time(getPickTime());
+        orderInfo.setOrder_pick_address(pick_up_address.getText().toString());
+        orderInfo.setUserphone(phone_edit.getText().toString());
+        Gson gson = new Gson();
+        String info = gson.toJson(orderInfo);
+        NetAccess.upOrderInfo(info,mhandler);
+
     }
 }

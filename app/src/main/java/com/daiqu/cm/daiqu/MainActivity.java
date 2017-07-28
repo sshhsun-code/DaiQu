@@ -154,6 +154,7 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
 
     @Override
     public void goOhter(Activity activity) {
+        Log.d(TAG, "goOhter: " + activity);
         Intent intent = new Intent();
 
         intent.setClass(MainActivity.this,activity.getClass());

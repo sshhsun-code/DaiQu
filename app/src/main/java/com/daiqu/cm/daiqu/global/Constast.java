@@ -25,5 +25,17 @@ public class Constast {
     public static final String COMMON_ADDRESS = "common_address";
     public static final String HAS_ADDED = "has_added";
     public static final String IS_FIRST = "is_first";
+    public static final String LOGIN_PHONE_NUMBER = "login_phone_number";
+    public static final String NEW_ORDER_NUMBER = "new_order_number";
+
+    //订单状态
+//    * 0     waitting       等待接单
+//    * 1      picked         已接单
+//    * 2      Receiving   请确认收货
+//    * 3      done            已完成
+    public static final int  WAITTING  = 20;
+    public static final int  PICKED  = 21;
+    public static final int  RECEIVING  = 22;
+    public static final int  DONE  = 23;
 
 }

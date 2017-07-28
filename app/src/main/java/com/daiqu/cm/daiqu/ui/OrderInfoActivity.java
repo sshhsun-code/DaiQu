@@ -2,6 +2,8 @@ package com.daiqu.cm.daiqu.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -11,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daiqu.cm.daiqu.R;
+import com.daiqu.cm.daiqu.global.Constast;
+import com.daiqu.cm.daiqu.global.GlobalPref;
+import com.daiqu.cm.daiqu.utils.NetAccess;
 
 /**
  * Created by CM on 2017/7/27.
@@ -32,6 +37,7 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
     private ImageView imageView5;
     private ImageView imageView6;
 
+    private Handler mHandler;
 
 
     @Override
@@ -51,13 +57,13 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
         imageView3 = findViewById(R.id.list_item3).findViewById(R.id.order_info_iamge);
 
         text4 = findViewById(R.id.list_item4).findViewById(R.id.order_info_status);
-        imageView1 = findViewById(R.id.list_item4).findViewById(R.id.order_info_iamge);
+        imageView4 = findViewById(R.id.list_item4).findViewById(R.id.order_info_iamge);
 
         text5 = findViewById(R.id.list_item5).findViewById(R.id.order_info_status);
-        imageView1 = findViewById(R.id.list_item5).findViewById(R.id.order_info_iamge);
+        imageView5 = findViewById(R.id.list_item5).findViewById(R.id.order_info_iamge);
 
         text6 = findViewById(R.id.list_item6).findViewById(R.id.order_info_status);
-        imageView1 = findViewById(R.id.list_item6).findViewById(R.id.order_info_iamge);
+        imageView6 = findViewById(R.id.list_item6).findViewById(R.id.order_info_iamge);
 
         text1.setText("等待接单中");
         text2.setText("已接单");
@@ -77,13 +83,42 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
             }
         });
 
-
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case Constast.WAITTING:
+                        text1.setText("等待接单中");
+                        break;
+                    case Constast.PICKED:
+                        text1.setText("已接单");
+                        break;
+                    case Constast.DONE:
+                        text1.setText("已接单");
+                        break;
+                    case Constast.RECEIVING:
+                        break;
+                }
+            }
+        };
     }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getData();
+    }
 
     @Override
     public void onClick(View view) {
         this.finish();
+    }
+
+    private void getData(){
+        String phone = GlobalPref.getInstance(OrderInfoActivity.this)
+                .getString(Constast.LOGIN_PHONE_NUMBER,"");
+        String order_serial_num = GlobalPref.getInstance(OrderInfoActivity.this)
+                .getString(Constast.NEW_ORDER_NUMBER,"");
+        NetAccess.getOrderStatus(phone,order_serial_num,mHandler);
     }
 }

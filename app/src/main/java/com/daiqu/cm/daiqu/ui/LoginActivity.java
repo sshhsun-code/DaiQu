@@ -15,6 +15,7 @@ import com.daiqu.cm.daiqu.DaiQuApplication;
 import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
 import com.daiqu.cm.daiqu.global.Constast;
+import com.daiqu.cm.daiqu.global.GlobalPref;
 import com.daiqu.cm.daiqu.utils.NetAccess;
 
 /**
@@ -72,6 +73,11 @@ public class LoginActivity extends Activity{
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case Constast.NET_LOGIN_SUCCESS:
+
+                        //将登陆号码保存本地
+                        GlobalPref.getInstance(LoginActivity.this)
+                                .putString(Constast.LOGIN_PHONE_NUMBER,login_name.getText().toString());
+
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         Toast.makeText(DaiQuApplication.getInstance(),"真实跳转",Toast.LENGTH_SHORT).show();
                         break;
