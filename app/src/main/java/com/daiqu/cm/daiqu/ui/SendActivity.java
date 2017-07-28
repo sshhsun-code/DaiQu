@@ -227,11 +227,11 @@ public class SendActivity extends Activity implements View.OnClickListener{
         orderInfo.setOrder_home_address(arrive_address.getText().toString());
         orderInfo.setOrder_pick_num(pick_up_code.getText().toString());
         orderInfo.setOrder_serial_num(getMillisTime());
-        orderInfo.setOrder_date(getDate());
         orderInfo.setOrder_price(getPrice());
         orderInfo.setOrder_pick_time(getPickTime());
         orderInfo.setOrder_pick_address(pick_up_address.getText().toString());
-        orderInfo.setUserphone(phone_edit.getText().toString());
+        orderInfo.setUserphone(GlobalPref.getInstance(SendActivity.this)
+                .getString(Constast.LOGIN_PHONE_NUMBER,phone_edit.getText().toString()));
         Gson gson = new Gson();
         String info = gson.toJson(orderInfo);
         NetAccess.upOrderInfo(info,mhandler);

@@ -47,4 +47,8 @@
     <string name="common_address">常用收货地址：</string>
     <string name="queren">确认</string>
     <string name="sure_message">喵~，您的信息已经保存成功了，快去发单吧！</string>
+    <string name="assessment">评价</string>
+    <string name="assessment_tips">宝贝，给喵星人打个分吧~</string>
+    <string name="assessment_reward">喵喵不易，给TA点鼓励吧~</string>
+    <string name="assessment_reward_tips">您的打赏将直接转给喵星人！</string>
 </resources>

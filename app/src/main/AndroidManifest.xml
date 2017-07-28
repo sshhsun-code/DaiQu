@@ -31,6 +31,7 @@
         <activity android:name="com.daiqu.cm.daiqu.ui.SendResaultActivity"/>
         <activity android:name="com.daiqu.cm.daiqu.ui.AddInfoActivity"/>
         <activity android:name="com.daiqu.cm.daiqu.ui.OrderInfoActivity"/>
+        <activity android:name="com.daiqu.cm.daiqu.ui.AssessmentActivity"/>
     </application>
 
 </manifest>

@@ -116,6 +116,8 @@ public class NetAccess {
                     handler.sendEmptyMessage(Constast.NET_SIGNUP_SUCCESS);
                 } else if ("0".equals(res)){
                     handler.sendEmptyMessage(Constast.NET_LOGIN_SUCCESS);
+                } else if ("20".equals(res) || "21".equals(res) || "22".equals(res) || "23".equals(res)){
+                    handler.sendEmptyMessage(Integer.parseInt(res));
                 }
             } else {
                 handler.sendEmptyMessage(Constast.NET_LOGIN_FAIL);

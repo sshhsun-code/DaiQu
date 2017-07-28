@@ -1,11 +1,13 @@
 package com.daiqu.cm.daiqu.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,6 +24,8 @@ import com.daiqu.cm.daiqu.utils.NetAccess;
  */
 
 public class OrderInfoActivity extends Activity implements View.OnClickListener {
+
+    private static final String TAG = "OrderInfoActivity";
 
     private Button back;
     private TextView text1;
@@ -76,9 +80,11 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
         imageView5.setImageResource(R.drawable.order_jie_text);
         imageView6.setImageResource(R.drawable.order_jie_text);
 
-        findViewById(R.id.list_item3).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.list_item1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(OrderInfoActivity.this,AssessmentActivity.class);
+                startActivity(intent);
                 Toast.makeText(OrderInfoActivity.this,"点击了。，，，，",Toast.LENGTH_SHORT).show();
             }
         });
@@ -86,7 +92,9 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
+                Log.d(TAG, "handleMessage: " + msg.what);
                 switch (msg.what) {
+
                     case Constast.WAITTING:
                         text1.setText("等待接单中");
                         break;
@@ -94,9 +102,10 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
                         text1.setText("已接单");
                         break;
                     case Constast.DONE:
-                        text1.setText("已接单");
+                        text1.setText("已完成");
                         break;
                     case Constast.RECEIVING:
+                        text1.setText(("请确收货"));
                         break;
                 }
             }
@@ -106,6 +115,7 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: ");
         getData();
     }
 
