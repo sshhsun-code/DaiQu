@@ -17,6 +17,8 @@ public class Constast {
 
     public static final int GET_VERIFICVATION_NUM = 4; //得到验证码
 
+    public static final int OREDR_INFO_ADDED = 10; //订单详情数据插入成功
+
     //SP
     public static final String NAME = "true_name";
     public static final String USER_NAME = "user_name";
