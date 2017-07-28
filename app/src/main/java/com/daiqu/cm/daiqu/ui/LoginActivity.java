@@ -18,6 +18,8 @@ import com.daiqu.cm.daiqu.global.Constast;
 import com.daiqu.cm.daiqu.global.GlobalPref;
 import com.daiqu.cm.daiqu.utils.NetAccess;
 
+import java.util.regex.Pattern;
+
 /**
  * Created by CM on 2017/7/24.
  *
@@ -44,13 +46,21 @@ public class LoginActivity extends Activity{
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phone = TextUtils.isEmpty(login_name.getText().toString()) ? "admin" : login_name.getText().toString();
-                String password = TextUtils.isEmpty(login_password.getText().toString()) ? "admin" : login_password.getText().toString();
-                if (phone.equals("admin") || password.equals("admin")) {  //方便测试，完成后去掉此选项，只走服务器访问来登录
-                    loginhandler.sendEmptyMessage(Constast.NET_LOGIN_FAIL);
-                } else {
-                    NetAccess.AccessLogin(phone,password,loginhandler);
+                String phone =  login_name.getText().toString();
+                String password =  login_password.getText().toString();
+                if (TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(DaiQuApplication.getInstance(),"账号密码不能为空",Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                if (phone.length() != 11 || password.length() < 8 ) {
+                    Toast.makeText(DaiQuApplication.getInstance(),"请按规范填写账号密码",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!isMatch(password)) {
+                    Toast.makeText(DaiQuApplication.getInstance(),"密码中只能包含数字以及字母",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                NetAccess.AccessLogin(phone,password,loginhandler);
             }
         });
         sign_up = (Button) findViewById(R.id.sign_up);
@@ -60,6 +70,12 @@ public class LoginActivity extends Activity{
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
+    }
+
+    private boolean isMatch(String string) {
+        final String regex = "^[A-Za-z0-9]+$";
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(string).find();
     }
 
     private void initView() {
@@ -82,7 +98,6 @@ public class LoginActivity extends Activity{
                         Toast.makeText(DaiQuApplication.getInstance(),"真实跳转",Toast.LENGTH_SHORT).show();
                         break;
                     case Constast.NET_LOGIN_FAIL:
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         Toast.makeText(DaiQuApplication.getInstance(),"模拟跳转",Toast.LENGTH_SHORT).show();
                         break;
                 }
