@@ -28,17 +28,17 @@
         android:layout_gravity="left|top"
         android:src="@drawable/send" />
 
-    <TextView
-        android:id="@+id/tips"
-        android:layout_gravity="right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
     <master.flame.danmaku.ui.widget.DanmakuView
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
         android:id="@+id/danmaku_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="TextView" />
 </FrameLayout>

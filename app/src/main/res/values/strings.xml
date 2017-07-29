@@ -2,7 +2,7 @@
     <string name="app_name">DaiQu</string>
     <string name="app_name_cn">喵趣</string>
     <string name="app_name_cn2">(=￣ω￣=) 喵~</string>
-    <string name="rob">我要抢单</string>
+    <string name="rob">接单</string>
     <string name="my">我的</string>
     <string name="faxian">发现</string>
     <string name="home">首页</string>
@@ -51,4 +51,5 @@
     <string name="assessment_tips">宝贝，给喵星人打个分吧~</string>
     <string name="assessment_reward">喵喵不易，给TA点鼓励吧~</string>
     <string name="assessment_reward_tips">您的打赏将直接转给喵星人！</string>
+    <string name="assessment_saved">喵星人已收到您的评价么么哒~</string>
 </resources>

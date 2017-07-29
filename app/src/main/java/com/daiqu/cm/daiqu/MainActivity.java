@@ -44,6 +44,8 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
     int screenWidth;
     int screenHeight;
 
+    public static boolean needHome = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,18 +69,15 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
                 .setBarBackgroundColor(R.color.bottom_bar_white)
                 .initialise();
         bottomNavigationBar.setTabSelectedListener(this);
-
-
-
-
-
-
+                setDefaultFragment();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        setDefaultFragment();
+        if (needHome){
+            setDefaultFragment();
+        }
     }
 
     /**
@@ -110,6 +109,7 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         HomeFragment homeFragment = mHomeFragment.newInstance(getString(R.string.home));
         transaction.replace(R.id.main_content, homeFragment).commit();
+        needHome = true;
     }
 
     @Override
@@ -161,5 +161,12 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
 
         startActivity(intent);
 
+    }
+
+    /**
+     * 对外提供一个回到MainActivity是展示主页的方法
+     */
+    public static void setHomeFragment(){
+        needHome = true;
     }
 }

@@ -23,13 +23,18 @@ import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
 import com.daiqu.cm.daiqu.global.Constast;
 import com.daiqu.cm.daiqu.inter.GoOtherActivity;
+import com.daiqu.cm.daiqu.ui.AssSuccessActivity;
+import com.daiqu.cm.daiqu.ui.RobActivity;
 import com.daiqu.cm.daiqu.ui.SendActivity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import master.flame.danmaku.controller.DrawHandler;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
 import master.flame.danmaku.danmaku.model.DanmakuTimer;
+import master.flame.danmaku.danmaku.model.Duration;
 import master.flame.danmaku.danmaku.model.IDanmakus;
 import master.flame.danmaku.danmaku.model.android.DanmakuContext;
 import master.flame.danmaku.danmaku.model.android.Danmakus;
@@ -77,6 +82,9 @@ public class HomeFragment extends Fragment {
 
     public GoOtherActivity goOtherActivity;
 
+
+    public static ArrayList<String> danmuList = new ArrayList<String>();
+
     public static HomeFragment newInstance(String s){
         HomeFragment homeFragment = new HomeFragment();
         Bundle bundle = new Bundle();
@@ -96,8 +104,11 @@ public class HomeFragment extends Fragment {
         bottomImage = v.findViewById(R.id.bottom_iamge);
         tips = v.findViewById(R.id.tips);
 
+        initDanmuList();
+
         danmakuView = v.findViewById(R.id.danmaku_view);
         danmakuView.enableDanmakuDrawingCache(true);
+
         danmakuView.setCallback(new DrawHandler.Callback() {
             @Override
             public void prepared() {
@@ -121,7 +132,16 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        //设置是否禁止重叠
+        HashMap<Integer, Boolean> overlappingEnablePair = new HashMap<Integer, Boolean>();
+        overlappingEnablePair.put(BaseDanmaku.TYPE_SCROLL_LR, true);
+        overlappingEnablePair.put(BaseDanmaku.TYPE_FIX_BOTTOM, true);
+
         danmakuContext = DanmakuContext.create();
+        danmakuContext.setScrollSpeedFactor(1.2f)
+                .preventOverlapping(overlappingEnablePair);//设置弹幕滚动速度系数,只对滚动弹幕有效
+
         danmakuView.prepare(parser, danmakuContext);
 
 
@@ -146,6 +166,25 @@ public class HomeFragment extends Fragment {
         });
 
         return v;
+    }
+
+    private void initDanmuList(){
+        danmuList.add("陈喵喵~刚刚发送了一个订单，价值一包小鱼干，快去抢单吧");
+        danmuList.add("王喵喵~刚刚抢到了一个订单，又可以赚小鱼干了，好开心 (*^__^*)");
+        danmuList.add("孙喵喵~刚刚送达了一个订单，收到了一大包小鱼干…(⊙_⊙;)… ○");
+        danmuList.add("解喵喵的订单有人接单了，终于可以懒懒的躺倒摇摇床上等快递了O__O");
+        danmuList.add("钟喵喵的订单开始配送了，准备好小鱼干迎接★~★ ");
+        danmuList.add("赵喵喵~刚刚发送了一个订单，价值一包小鱼干，快去抢单吧");
+        danmuList.add("孙喵喵~刚刚抢到了一个订单，又可以赚小鱼干了，好开心 (*^__^*)");
+        danmuList.add("曹喵喵~刚刚送达了一个订单，收到了一大包小鱼干…(⊙_⊙;)… ○");
+        danmuList.add("李喵喵的订单有人接单了，终于可以懒懒的躺倒摇摇床上等快递了O__O");
+        danmuList.add("欧喵喵的订单开始配送了，准备好小鱼干迎接★~★ ");
+        danmuList.add("管喵喵~刚刚发送了一个订单，价值一包小鱼干，快去抢单吧");
+        danmuList.add("梁喵喵~刚刚抢到了一个订单，又可以赚小鱼干了，好开心 (*^__^*)");
+        danmuList.add("魏喵喵~刚刚送达了一个订单，收到了一大包小鱼干…(⊙_⊙;)… ○");
+        danmuList.add("乌喵喵的订单有人接单了，终于可以懒懒的躺倒摇摇床上等快递了O__O");
+        danmuList.add("徐喵喵的订单开始配送了，准备好小鱼干迎接★~★ ");
+
     }
 
     private View.OnTouchListener package_logo_TouchListener = new View.OnTouchListener() {
@@ -224,6 +263,7 @@ public class HomeFragment extends Fragment {
                     }else if(lastX >= right_border - with_RecArea
                             && lastY >= bottom_border - height_RecArea) {
                         tips.setText("抢单------");
+
                         showDialog();
                     }else {
                         left = beginX-(v.getWidth()/2);
@@ -253,15 +293,21 @@ public class HomeFragment extends Fragment {
      *          弹幕的具体内容
      * @param  withBorder
      *          弹幕是否有边框
+     * @param  color
+     *          弹幕颜色，-1则为默认
      */
-    private void addDanmaku(String content, boolean withBorder) {
+    private void addDanmaku(String content, boolean withBorder, int color) {
+        if (color <1){
+            color = Color.GRAY;
+        }
         BaseDanmaku danmaku = danmakuContext.mDanmakuFactory.createDanmaku(BaseDanmaku.TYPE_SCROLL_RL);
         danmaku.text = content;
         int padding = new Random().nextInt(160);
         danmaku.padding =  sp2px(padding);
         danmaku.textSize = sp2px(20);
-        danmaku.textColor = Color.BLACK;
-        danmaku.setTime(danmakuView.getCurrentTime());
+        danmaku.textColor = color;
+        danmaku.setTime(danmakuView.getCurrentTime() + 5200);
+        danmaku.setDuration(new Duration(8000));
         if (withBorder) {
             danmaku.borderColor = Color.GREEN;
         }
@@ -275,12 +321,17 @@ public class HomeFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                int i = 0;
                 while(showDanmaku) {
                     int time = new Random().nextInt(300);
-                    String content = "" + time + time;
-                    addDanmaku(content, false);
+                    String content = danmuList.get(i++);
+                    addDanmaku(content, false , -1);
+
+                    if (i >= danmuList.size()){
+                        i = 0;
+                    }
                     try {
-                        Thread.sleep(time * 10);
+                        Thread.sleep(time * 30);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -340,6 +391,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: authentication_btn");
+                dialog.dismiss();
+                goOtherActivity.goOhter(new RobActivity());
             }
         });
 

@@ -20,9 +20,10 @@
         android:layout_height="50dp" />
 
     <TextView
+        android:layout_gravity="center"
         android:padding="5dp"
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/authentication_tips" />

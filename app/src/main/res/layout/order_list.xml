@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="15dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/order_info_bg"
+    android:layout_height="150dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/address_layout">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="体育场西侧" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="---" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="18sp"
+            android:text="相思公寓210" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/money_layout">
+        <ImageView
+            android:id="@+id/money_logon"
+            android:layout_width="30dp"
+            android:layout_height="45dp"
+            android:src="@drawable/money_logo"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/money_num" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:text="3"
+            android:textColor="@color/OrangeRed"
+            android:textSize="27sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/time_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/address_layout"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="今天12:00"/>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="---"/>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="14:00"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/company_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="17dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/yuantong" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="7dp"
+            android:textSize="18sp"
+            android:text="圆通快递"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/rob_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:background="@drawable/rob_order_btn_bg"
+                android:src="@drawable/rob_user_head"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:text="已接单"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/rob_btn"
+            android:text="我要抢单"
+            android:textColor="@color/white"
+            android:background="@drawable/rob_order_btn_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+
+    </FrameLayout>
+
+
+</RelativeLayout>
