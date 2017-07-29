@@ -156,6 +156,12 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
     }
 
     @Override
+    protected void onStop() {
+        checkDone = true;
+        mcheckHandler.removeMessages(0);
+    }
+
+    @Override
     public void onClick(View view) {
         this.finish();
     }
@@ -178,6 +184,7 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
         Log.e("OrderInfoActivity","-----------------------");
         checkThread.quit();
         checkDone = true;
+        mcheckHandler.removeMessages(0);
         index = 1;
     }
 }

@@ -23,6 +23,9 @@ public class GlobalPref {
     public static final String VERIFICATION_NUM = "verification_num"; //验证码
 
 
+    public static final String VERIFICATION_NUM_TIME = "verification_num_time"; //上一次发送验证码的时间
+
+
 
     protected GlobalPref() {
     }
@@ -114,5 +117,13 @@ public class GlobalPref {
 
     public void setVerificationNum (String num) {
         putString(VERIFICATION_NUM,num);
+    }
+
+    public long getVerificationNumTime() {
+        return getLong(VERIFICATION_NUM_TIME,0);
+    }
+
+    public void setVerificationNumTime (long time) {
+        putLong(VERIFICATION_NUM,time);
     }
 }
