@@ -46,13 +46,13 @@ public class LoginActivity extends Activity{
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /**
-                 *
-                 */
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                /**
-                 *
-                 */
+//                /**
+//                 *
+//                 */
+//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                /**
+//                 *
+//                 */
                 String phone =  login_name.getText().toString();
                 String password =  login_password.getText().toString();
                 if (TextUtils.isEmpty(phone) || TextUtils.isEmpty(password)) {

@@ -17,11 +17,13 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
 import com.daiqu.cm.daiqu.global.Constast;
+import com.daiqu.cm.daiqu.global.GlobalPref;
 import com.daiqu.cm.daiqu.inter.GoOtherActivity;
 import com.daiqu.cm.daiqu.ui.AssSuccessActivity;
 import com.daiqu.cm.daiqu.ui.RobActivity;
@@ -54,6 +56,8 @@ public class HomeFragment extends Fragment {
     private ImageView bottomImage;
     private TextView tips;
     private DanmakuView danmakuView;
+
+    private RelativeLayout guide;
 
     //弹幕
     private DanmakuContext danmakuContext;
@@ -103,6 +107,20 @@ public class HomeFragment extends Fragment {
         topImage = v.findViewById(R.id.top_image);
         bottomImage = v.findViewById(R.id.bottom_iamge);
         tips = v.findViewById(R.id.tips);
+
+        guide = v.findViewById(R.id.guide);
+        guide.setAlpha(0.8f);
+
+        if (GlobalPref.getInstance().getBoolean("IS_FIRST_HOME",true)){
+            guide.setVisibility(View.VISIBLE);
+            guide.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    guide.setVisibility(View.GONE);
+                    GlobalPref.getInstance().putBoolean("IS_FIRST_HOME",false);
+                }
+            });
+        }
 
         initDanmuList();
 
