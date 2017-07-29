@@ -201,6 +201,11 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss(); //关闭dialog
+                String phone = GlobalPref.getInstance(OrderInfoActivity.this)
+                        .getString(Constast.LOGIN_PHONE_NUMBER,"");
+                String order_serial_num = GlobalPref.getInstance(OrderInfoActivity.this)
+                        .getString(Constast.NEW_ORDER_NUMBER,"");
+                NetAccess.confirmOrderStatusDone(phone,order_serial_num,mHandler);
                 Intent intent = new Intent(OrderInfoActivity.this,AssessmentActivity.class);
                 startActivity(intent);
             }

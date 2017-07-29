@@ -93,6 +93,21 @@ public class NetAccess {
             }
         }).start();
     }
+    /**
+     * 确认订单已收货，完成
+     * @param phone
+     * @param num
+     * @param handler
+     */
+    public static void confirmOrderStatusDone(String phone, String num, final Handler handler){
+        final String getStatusUrl = BASEURL + "updateorder.do?phone="+phone+"&order_serial_num="+num+"&status="+23;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                doGet(getStatusUrl,handler);
+            }
+        }).start();
+    }
 
     /**
      * get请求访问
