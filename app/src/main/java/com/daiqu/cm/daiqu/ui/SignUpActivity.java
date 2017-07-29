@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daiqu.cm.daiqu.DaiQuApplication;
-import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
 import com.daiqu.cm.daiqu.global.Constast;
 import com.daiqu.cm.daiqu.global.GlobalPref;
@@ -40,12 +40,20 @@ public class SignUpActivity extends Activity{
 
     private TextView txt_get_message;
 
+    private HandlerThread countThread;
+    private Handler  mcheckHandler;
+
+    private static int count = 60;
+
+    private boolean isCounting = false;//是否在倒计时
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         initData();
         initView();
+        initConuntThread();
         sign_up = (Button) findViewById(R.id.sign_up);
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,14 +84,18 @@ public class SignUpActivity extends Activity{
         txt_get_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                long now = System.currentTimeMillis();
-                long past = GlobalPref.getInstance().getVerificationNumTime();
-                if (past == 0 || TimeUtils.getSeconds(past, now) > 60) {
-                    GlobalPref.getInstance().setVerificationNumTime(now);
-                } else {
-                    Toast.makeText(DaiQuApplication.getInstance(),"验证码已发送，"+(int)(60 -TimeUtils.getSeconds(past, now))+"秒后再重新获取验证码",Toast.LENGTH_SHORT).show();
+                if (isCounting) {
                     return;
                 }
+//                long now = System.currentTimeMillis();
+//                long past = GlobalPref.getInstance().getVerificationNumTime();
+//                if (past == 0 || TimeUtils.getSeconds(past, now) > 60) {
+//                    GlobalPref.getInstance().setVerificationNumTime(now);
+//                } else {
+//                    Toast.makeText(DaiQuApplication.getInstance(),"验证码已发送，"+(int)(60 -TimeUtils.getSeconds(past, now))+"秒后再重新获取验证码",Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+                mcheckHandler.sendEmptyMessage(0);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -92,6 +104,29 @@ public class SignUpActivity extends Activity{
                 }).start();
             }
         });
+    }
+
+    private void initConuntThread() {
+        countThread = new HandlerThread("checkThread");
+        countThread.start();
+        mcheckHandler = new Handler(countThread.getLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                updateNum();
+                if (isCounting) {
+                    mcheckHandler.sendEmptyMessageDelayed(0,1000);
+                }
+            }
+        };
+    }
+
+    private void updateNum() {
+        mhandler.sendEmptyMessage(11);
+        isCounting = !(count == 0); //是否还在60秒倒计时
+        if (!isCounting) {
+            mhandler.sendEmptyMessage(12);
+            count = 60;
+        }
     }
 
 
@@ -113,7 +148,15 @@ public class SignUpActivity extends Activity{
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
+                    case 11:
+                    txt_get_message.setText(""+(count--));
+                        break;
+                    case 12:
+                    txt_get_message.setText("获取验证码");
+                        break;
                     case Constast.NET_SIGNUP_SUCCESS:
+                        GlobalPref.getInstance(DaiQuApplication.getInstance())
+                                .putString(Constast.LOGIN_PHONE_NUMBER,login_name.getText().toString());
                         Toast.makeText(DaiQuApplication.getInstance(),"喵~，注册成功！",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignUpActivity.this, SignUpSuccessActivity.class));
                         break;
@@ -142,5 +185,9 @@ public class SignUpActivity extends Activity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        countThread.quit();
+        isCounting = false;
+        count = 60;
+        mcheckHandler.removeMessages(0);
     }
 }

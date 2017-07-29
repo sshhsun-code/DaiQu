@@ -124,6 +124,6 @@ public class GlobalPref {
     }
 
     public void setVerificationNumTime (long time) {
-        putLong(VERIFICATION_NUM,time);
+        putLong(VERIFICATION_NUM_TIME,time);
     }
 }

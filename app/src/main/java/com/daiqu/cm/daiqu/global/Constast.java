@@ -30,6 +30,9 @@ public class Constast {
     public static final String LOGIN_PHONE_NUMBER = "login_phone_number";
     public static final String NEW_ORDER_NUMBER = "new_order_number";
 
+    public static final String REMEBER_ME = "remeber_me";
+    public static final String LOGIN_PASSWORD = "login_password";
+
     //订单状态
 //    * 0     waitting       等待接单
 //    * 1      picked         已接单

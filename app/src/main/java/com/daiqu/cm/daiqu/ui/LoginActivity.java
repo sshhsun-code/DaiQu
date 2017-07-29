@@ -8,6 +8,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,6 +34,8 @@ public class LoginActivity extends Activity{
 
     private EditText login_name;
     private EditText login_password;
+
+    private CheckBox checkBox;
 
     private Handler loginhandler;
 
@@ -88,6 +91,7 @@ public class LoginActivity extends Activity{
     private void initView() {
         login_name = (EditText) findViewById(R.id.login_name);
         login_password = (EditText) findViewById(R.id.login_password);
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
     }
 
     private void initData() {
@@ -100,7 +104,10 @@ public class LoginActivity extends Activity{
                         //将登陆号码保存本地
                         GlobalPref.getInstance(LoginActivity.this)
                                 .putString(Constast.LOGIN_PHONE_NUMBER,login_name.getText().toString());
-
+                        GlobalPref.getInstance().putBoolean("REMEBER_ME",checkBox.isChecked());
+                        if (checkBox.isChecked()) {
+                            GlobalPref.getInstance().putString("LOGIN_PASSWORD",login_password.getText().toString());
+                        }
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         Toast.makeText(DaiQuApplication.getInstance(),"真实跳转",Toast.LENGTH_SHORT).show();
                         break;
