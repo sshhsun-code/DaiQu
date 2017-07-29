@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -61,10 +62,10 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
         bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
 
         bottomNavigationBar
-                .addItem(new BottomNavigationItem(R.drawable.my_cat,R.string.my))
                 .addItem(new BottomNavigationItem(R.drawable.home_cat,R.string.home))
                 .addItem(new BottomNavigationItem(R.drawable.faxian_cat,R.string.faxian))
-                .setFirstSelectedPosition(1)
+                .addItem(new BottomNavigationItem(R.drawable.my_cat,R.string.my))
+                .setFirstSelectedPosition(0)
                 .setActiveColor(R.color.selectedRed)
                 .setBarBackgroundColor(R.color.bottom_bar_white)
                 .initialise();
@@ -75,9 +76,6 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
     @Override
     protected void onStart() {
         super.onStart();
-        if (needHome){
-            setDefaultFragment();
-        }
     }
 
     /**
@@ -117,25 +115,25 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
         FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
         switch (position){
             case 0:
-                if(mMyFragment == null) {
-                    mMyFragment = MyFragment.newInstance(getString(R.string.my));
-                }
-                Log.d(TAG, "mMyFragment: " + mMyFragment);
-                beginTransaction.replace(R.id.main_content, mMyFragment);
-                break;
-            case 1:
                 if(mHomeFragment == null) {
                     mHomeFragment = HomeFragment.newInstance(getString(R.string.home));
                 }
                 Log.d(TAG, "mHomeFragment: " + mHomeFragment);
                 beginTransaction.replace(R.id.main_content, mHomeFragment);
                 break;
-            case 2:
+            case 1:
                 if(mFaxianFragment == null) {
                     mFaxianFragment = FaxianFragment.newInstance(getString(R.string.faxian));
                 }
                 Log.d(TAG, "mFaxianFragment: " + mFaxianFragment);
                 beginTransaction.replace(R.id.main_content, mFaxianFragment);
+                break;
+            case 2:
+                if(mMyFragment == null) {
+                    mMyFragment = MyFragment.newInstance(getString(R.string.my));
+                }
+                Log.d(TAG, "mMyFragment: " + mMyFragment);
+                beginTransaction.replace(R.id.main_content, mMyFragment);
                 break;
         }
         beginTransaction.commit();
@@ -164,9 +162,20 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
     }
 
     /**
-     * 对外提供一个回到MainActivity是展示主页的方法
+     * 对外提供一个回到MainActivity否展示页的方法
      */
-    public static void setHomeFragment(){
-        needHome = true;
+    public static void setFragment(boolean needHome){
+        needHome = needHome;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Log.d(TAG, "按下了back键 onKeyDown()");
+            setDefaultFragment();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 }

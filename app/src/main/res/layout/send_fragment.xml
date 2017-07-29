@@ -67,7 +67,7 @@
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line_background"/>
+        android:background="@color/line"/>
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -102,7 +102,7 @@
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line_background"/>
+        android:background="@color/line"/>
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -142,7 +142,7 @@
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line_background"/>
+        android:background="@color/line"/>
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -172,7 +172,7 @@
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line_background"/>
+        android:background="@color/line"/>
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -213,7 +213,7 @@
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line_background"/>
+        android:background="@color/line"/>
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -247,7 +247,7 @@
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line_background"/>
+        android:background="@color/line"/>
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -286,7 +286,7 @@
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line_background"/>
+        android:background="@color/line"/>
 
     <LinearLayout
         android:paddingLeft="10dp"
@@ -333,6 +333,7 @@
         android:background="@drawable/send_confirm_btn_bg"
         android:text="@string/confirm"
         android:textColor="@color/white" />
+
 
 
 </LinearLayout>

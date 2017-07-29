@@ -1,6 +1,8 @@
 package com.daiqu.cm.daiqu.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
 import com.daiqu.cm.daiqu.global.Constast;
 import com.daiqu.cm.daiqu.global.GlobalPref;
@@ -91,8 +94,7 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
         findViewById(R.id.list_item1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OrderInfoActivity.this,AssessmentActivity.class);
-                startActivity(intent);
+                showDialog();
                 Toast.makeText(OrderInfoActivity.this,"点击了。，，，，",Toast.LENGTH_SHORT).show();
             }
         });
@@ -157,12 +159,15 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
 
     @Override
     protected void onStop() {
+        super.onStop();
         checkDone = true;
         mcheckHandler.removeMessages(0);
     }
 
     @Override
     public void onClick(View view) {
+//        Intent intent = new Intent(OrderInfoActivity.this, MainActivity.class);
+//        startActivity(intent);
         this.finish();
     }
 
@@ -187,4 +192,23 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
         mcheckHandler.removeMessages(0);
         index = 1;
     }
+
+    private void showDialog(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);  //先得到构造器
+        builder.setTitle("提示"); //设置标题
+        builder.setMessage(R.string.order_ensrue_message); //设置内容
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() { //设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss(); //关闭dialog
+                Intent intent = new Intent(OrderInfoActivity.this,AssessmentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //参数都设置完成了，创建并显示出来
+        builder.create().show();
+    }
+
+
 }

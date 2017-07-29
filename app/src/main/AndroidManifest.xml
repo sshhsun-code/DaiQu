@@ -34,6 +34,7 @@
         <activity android:name="com.daiqu.cm.daiqu.ui.AssessmentActivity"/>
         <activity android:name=".ui.AssSuccessActivity"/>
         <activity android:name=".ui.RobActivity"/>
+        <activity android:name=".ui.PayActivity"/>
     </application>
 
 </manifest>

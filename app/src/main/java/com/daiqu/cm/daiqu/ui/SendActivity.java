@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +36,7 @@ import java.util.Date;
  * Created by CM on 2017/7/27.
  */
 
-public class SendActivity extends Activity implements View.OnClickListener{
+public class SendActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = "SendActivity";
 
@@ -93,15 +94,15 @@ public class SendActivity extends Activity implements View.OnClickListener{
 
     private void initData() {
         Log.d(TAG, "initData: ");
-        
-        GlobalPref global = GlobalPref.getInstance(this);
-        if (global.getBoolean(Constast.HAS_ADDED,false)){
-            name_edit.setText(global.getString(Constast.NAME,""));
-            phone_edit.setText(global.getString(Constast.PHONE,""));
-            arrive_address.setText(global.getString(Constast.COMMON_ADDRESS,""));
-        }else {
 
-            Intent intent  = new Intent(SendActivity.this,AddInfoActivity.class);
+        GlobalPref global = GlobalPref.getInstance(this);
+        if (global.getBoolean(Constast.HAS_ADDED, false)) {
+            name_edit.setText(global.getString(Constast.NAME, ""));
+            phone_edit.setText(global.getString(Constast.PHONE, ""));
+            arrive_address.setText(global.getString(Constast.COMMON_ADDRESS, ""));
+        } else {
+
+            Intent intent = new Intent(SendActivity.this, AddInfoActivity.class);
             startActivity(intent);
 
         }
@@ -114,13 +115,13 @@ public class SendActivity extends Activity implements View.OnClickListener{
                 }
             }
         };
-        
+
     }
 
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.send_pick_up_address_edit:
 
                 break;
@@ -134,9 +135,10 @@ public class SendActivity extends Activity implements View.OnClickListener{
 
                 break;
             case R.id.send_back:
-                Intent intent = new Intent();
-                intent.setClass(SendActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
+//                Intent intent = new Intent();
+//                intent.setClass(SendActivity.this, MainActivity.class);
+//                startActivity(intent);
 //                FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
 //                beginTransaction.replace(R.id.main_content,
 //                        HomeFragment.newInstance(getString(R.string.home)));
@@ -172,8 +174,8 @@ public class SendActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    private void showDialog(){
-        AlertDialog.Builder builder=new AlertDialog.Builder(SendActivity.this);  //先得到构造器
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SendActivity.this);  //先得到构造器
         builder.setTitle("提示"); //设置标题
         builder.setMessage(R.string.confirm_tips); //设置内容
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() { //设置确定按钮
@@ -181,7 +183,7 @@ public class SendActivity extends Activity implements View.OnClickListener{
             public void onClick(DialogInterface dialog, int which) {
                 postToServer();
                 dialog.dismiss(); //关闭dialog
-                Intent intent = new Intent(SendActivity.this,SendResaultActivity.class);
+                Intent intent = new Intent(SendActivity.this, PayActivity.class);
                 startActivity(intent);
             }
         });
@@ -196,30 +198,30 @@ public class SendActivity extends Activity implements View.OnClickListener{
         builder.create().show();
     }
 
-    private Date getDate(){
-        Date curDate    = new Date(millisTime);//获取当前时间
+    private Date getDate() {
+        Date curDate = new Date(millisTime);//获取当前时间
         return curDate;
     }
 
-    private String getMillisTime(){
+    private String getMillisTime() {
         millisTime = System.currentTimeMillis();
-        GlobalPref.getInstance(SendActivity.this).putString(Constast.NEW_ORDER_NUMBER,millisTime+"");
-        return  millisTime + "";
+        GlobalPref.getInstance(SendActivity.this).putString(Constast.NEW_ORDER_NUMBER, millisTime + "");
+        return millisTime + "";
     }
 
-    private int getPrice(){
-        if(radioGroup.getCheckedRadioButtonId() == R.id.send_price_radio_small){
+    private int getPrice() {
+        if (radioGroup.getCheckedRadioButtonId() == R.id.send_price_radio_small) {
             return 3;
-        }else {
+        } else {
             return 5;
         }
     }
 
-    private String getPickTime(){
+    private String getPickTime() {
         return arrive_time_begin.getText().toString() + "-" + arrive_time_end.getText().toString();
     }
 
-    private void postToServer(){
+    private void postToServer() {
         final OrderInfo orderInfo = new OrderInfo();
         orderInfo.setOrder_name(name_edit.getText().toString());
         orderInfo.setOrder_phone(phone_edit.getText().toString());
@@ -231,10 +233,21 @@ public class SendActivity extends Activity implements View.OnClickListener{
         orderInfo.setOrder_pick_time(getPickTime());
         orderInfo.setOrder_pick_address(pick_up_address.getText().toString());
         orderInfo.setUserphone(GlobalPref.getInstance(SendActivity.this)
-                .getString(Constast.LOGIN_PHONE_NUMBER,phone_edit.getText().toString()));
+                .getString(Constast.LOGIN_PHONE_NUMBER, phone_edit.getText().toString()));
         Gson gson = new Gson();
         String info = gson.toJson(orderInfo);
-        NetAccess.upOrderInfo(info,mhandler);
+        NetAccess.upOrderInfo(info, mhandler);
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Log.d(TAG, "按下了back键 onKeyDown()");
+            finish();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 }

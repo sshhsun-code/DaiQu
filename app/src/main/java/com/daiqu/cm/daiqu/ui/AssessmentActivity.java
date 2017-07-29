@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 
+import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
 
 /**
@@ -19,6 +22,7 @@ public class AssessmentActivity extends Activity {
 
     private RatingBar ratingBar;
     private Button sure_btn;
+    private Button back_btn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +35,14 @@ public class AssessmentActivity extends Activity {
         ratingBar.setNumStars(5);
         ratingBar.setMax(5);
 
+        back_btn = findViewById(R.id.order_info_back);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GoMain();
+            }
+        });
+
         sure_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,5 +51,20 @@ public class AssessmentActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            GoMain();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    private void GoMain(){
+        Intent intent = new Intent(AssessmentActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

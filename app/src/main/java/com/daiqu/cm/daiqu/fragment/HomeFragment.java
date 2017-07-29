@@ -297,6 +297,9 @@ public class HomeFragment extends Fragment {
      *          弹幕颜色，-1则为默认
      */
     private void addDanmaku(String content, boolean withBorder, int color) {
+        if (!showDanmaku){
+            return;
+        }
         if (color <1){
             color = Color.GRAY;
         }
@@ -354,6 +357,7 @@ public class HomeFragment extends Fragment {
         if (danmakuView != null && danmakuView.isPrepared()) {
             danmakuView.pause();
         }
+        showDanmaku = false;
     }
 
     @Override
@@ -362,6 +366,7 @@ public class HomeFragment extends Fragment {
         if (danmakuView != null && danmakuView.isPrepared() && danmakuView.isPaused()) {
             danmakuView.resume();
         }
+        showDanmaku = true;
     }
 
     @Override
@@ -405,5 +410,12 @@ public class HomeFragment extends Fragment {
         if (activity != null){
             goOtherActivity = (GoOtherActivity) activity;
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        int left = beginX-(package_btn.getWidth()/2);
+        setViewPosition(package_btn,left, beginY - package_btn.getHeight(),left+package_btn.getWidth(),beginY);
     }
 }
