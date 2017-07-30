@@ -31,9 +31,9 @@ public class MessageVerification {
             SERVER_URL="https://api.netease.im/sms/sendcode.action";
     //网易云信分配的账号
     private static final String
-            APP_KEY="57c02f85e56a4ed386a68572183ab842";
+            APP_KEY="35d2e070d5c5f10e2b19034357ba6b32";
     //网易云信分配的密钥
-    private static final String APP_SECRET="ccd56a161558";
+    private static final String APP_SECRET="28c178cad7bc";
     //随机数
     private static final String NONCE="123456";
     //短信模板ID

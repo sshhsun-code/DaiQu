@@ -149,7 +149,7 @@ public class SignUpActivity extends Activity{
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 11:
-                    txt_get_message.setText(""+(count--));
+                    txt_get_message.setText("重新发送"+(count--));
                         break;
                     case 12:
                     txt_get_message.setText("获取验证码");
