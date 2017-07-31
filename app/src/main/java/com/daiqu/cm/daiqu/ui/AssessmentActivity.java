@@ -12,6 +12,10 @@ import android.widget.RatingBar;
 
 import com.daiqu.cm.daiqu.MainActivity;
 import com.daiqu.cm.daiqu.R;
+import com.daiqu.cm.daiqu.global.Constast;
+import com.daiqu.cm.daiqu.global.GlobalPref;
+
+import static com.daiqu.cm.daiqu.fragment.HomeFragment.danmuList;
 
 /**
  * Created by CM on 2017/7/28.
@@ -47,6 +51,7 @@ public class AssessmentActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AssessmentActivity.this, AssSuccessActivity.class);
+                finish();
                 startActivity(intent);
             }
         });
@@ -65,6 +70,7 @@ public class AssessmentActivity extends Activity {
 
     private void GoMain(){
         Intent intent = new Intent(AssessmentActivity.this, MainActivity.class);
+        finish();
         startActivity(intent);
     }
 }

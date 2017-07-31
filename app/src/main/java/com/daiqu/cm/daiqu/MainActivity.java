@@ -184,7 +184,7 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
                         Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
-                finish();
+//                finish();
                 System.exit(0);
             }
 

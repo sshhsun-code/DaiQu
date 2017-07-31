@@ -19,6 +19,8 @@ import com.daiqu.cm.daiqu.R;
 import com.daiqu.cm.daiqu.global.Constast;
 import com.daiqu.cm.daiqu.global.GlobalPref;
 
+import static com.daiqu.cm.daiqu.fragment.HomeFragment.danmuList;
+
 
 /**
  * Created by CM on 2017/7/27.
@@ -62,6 +64,7 @@ public class AddInfoActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.add_btn:
                 if (save()){
+                    danmuList.add(GlobalPref.getInstance().getString(Constast.USER_NAME,"") +"~刚刚发送了一个订单，价值一包小鱼干，快去抢单吧");
                     showDialog();
 
                 }else {

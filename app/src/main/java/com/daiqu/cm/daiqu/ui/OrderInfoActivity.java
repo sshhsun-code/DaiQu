@@ -94,8 +94,10 @@ public class OrderInfoActivity extends Activity implements View.OnClickListener 
         findViewById(R.id.list_item1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog();
-                Toast.makeText(OrderInfoActivity.this,"点击了。，，，，",Toast.LENGTH_SHORT).show();
+                if (text1.getText().toString().equals("请确收货")) {
+                    showDialog();
+                }
+//                Toast.makeText(OrderInfoActivity.this,"点击了。，，，，",Toast.LENGTH_SHORT).show();
             }
         });
 

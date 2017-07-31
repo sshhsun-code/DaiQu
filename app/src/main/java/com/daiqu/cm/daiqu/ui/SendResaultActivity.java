@@ -38,6 +38,7 @@ public class SendResaultActivity extends Activity{
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(SendResaultActivity.this, MainActivity.class);
+            finish();
             startActivity(intent);
         }
     };
@@ -46,6 +47,7 @@ public class SendResaultActivity extends Activity{
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
             Intent intent = new Intent(SendResaultActivity.this, MainActivity.class);
+            finish();
             startActivity(intent);
             return true;
         } else {
