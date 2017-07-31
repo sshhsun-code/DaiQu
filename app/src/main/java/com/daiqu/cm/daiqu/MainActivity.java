@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -168,14 +169,31 @@ public class MainActivity extends Activity implements BottomNavigationBar.OnTabS
         needHome = needHome;
     }
 
+
+    private long exitTime = 0;
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            Log.d(TAG, "按下了back键 onKeyDown()");
-            setDefaultFragment();
+            // 处理连按退出
+            // System.currentTimeMillis()无论何时调用，肯定大于2000
+            if ((System.currentTimeMillis() - exitTime) > 2000)
+            {
+                Log.d(TAG, "按下了back键 onKeyDown()");
+                setDefaultFragment();
+                Toast.makeText(getApplicationContext(), "再按一次,退出",
+                        Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+
             return true;
         } else {
             return super.onKeyDown(keyCode, event);
         }
     }
+
+
+
 }
