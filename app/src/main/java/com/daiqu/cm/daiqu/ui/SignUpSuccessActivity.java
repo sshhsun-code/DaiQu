@@ -28,6 +28,7 @@ public class SignUpSuccessActivity extends Activity{
         sign_up_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 startActivity(new Intent(DaiQuApplication.getInstance(), MainActivity.class));
             }
         });

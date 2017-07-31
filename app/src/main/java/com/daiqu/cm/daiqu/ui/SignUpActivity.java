@@ -158,6 +158,7 @@ public class SignUpActivity extends Activity{
                         GlobalPref.getInstance(DaiQuApplication.getInstance())
                                 .putString(Constast.LOGIN_PHONE_NUMBER,login_name.getText().toString());
                         Toast.makeText(DaiQuApplication.getInstance(),"喵~，注册成功！",Toast.LENGTH_SHORT).show();
+                        finish();
                         startActivity(new Intent(SignUpActivity.this, SignUpSuccessActivity.class));
                         break;
                     case Constast.NET_SIGNUP_FAIL:

@@ -108,8 +108,9 @@ public class LoginActivity extends Activity{
                         if (checkBox.isChecked()) {
                             GlobalPref.getInstance().putString("LOGIN_PASSWORD",login_password.getText().toString());
                         }
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         Toast.makeText(DaiQuApplication.getInstance(),"真实跳转",Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         break;
                     case Constast.NET_LOGIN_FAIL:
                         Toast.makeText(DaiQuApplication.getInstance(),"模拟跳转",Toast.LENGTH_SHORT).show();
